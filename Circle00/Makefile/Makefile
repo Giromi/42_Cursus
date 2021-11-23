@@ -5,30 +5,35 @@
 #                                                     +:+ +:+         +:+      #
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-#    Updated: 2021/11/22 21:49:03 by minsuki2         ###   ########.fr        #
+#    Created: 2021/11/23 12:15:15 by minsuki2          #+#    #+#              #
+#    Updated: 2021/11/23 19:25:23 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+
 CC = gcc
-W3 = -Wall -Werror -Wextra
-TARGET = diary_exe
-OBJECTS = memo.o calendar.o main.o
+CFLAGS = -Wall -Werror -Wextra
+NAME = diary_exe
+AR = ar rcs
 RM = rm -f
+INC = -I.
+FILES = memo \
+		calendar \
+		main
+CURRENT_DIR = ./
+.SUFFIXES : .c .o
 
-
-$(TARGET) : memo.o calendar.o main.o
-	$(CC) $(W3) -o $(TARGET) memo.o calendar.o main.o
-
-memo.o : memo.c
-	$(CC) $(W3) -c -o memo.o memo.c
-
-calendar.o : calendar.c
-	$(CC) $(W3) -c -o calendar.o calendar.c
-
-main.o : main.c
-	$(CC) $(W3) -c -o main.o main.c
+OBJECTS = $(addprefix $(CURRENT_DIR), $(addsuffix .o, $(FILES)))
+SOURES = $(addprefix $(CURRENT_DIR), $(addsuffix .c, $(FILES)))
+$(NAME) : $(OBJECTS)
+	$(CC) $(CFLAGS) $(INC) $^ -o $@
 
 clean :
 	$(RM) *.o
-	$(RM) diary_exe
+
+fclean : clean
+	$(RM) $(NAME)
+
+re : fclean all
+
+.PHONY : clean fclean re all

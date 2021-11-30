@@ -1,0 +1,8 @@
+
+|  Function 	|		Prototype			|							Description                      				|	Finished	|
+|:-------------:|---------------------------|---------------------------------------------------------------------------|:-------------:|
+| isalpha  		| int ft_isalpha(int c)   	|인자가 알파벳일 경우 1을, 아닐 경우 0을 반환하는 함수            	   		|	&check;		|
+| isdigit	 	| int ft_isdigit(int c) 	|인자가 숫자(0~9)일 경우 1을, 아닐 경우 0을 반환하는 함수					|	&check;		|
+| isalnum   	| int ft_isalnum(int c)   	|인자가 알파벳 혹은 숫자(0~9)일 경우 1을, 아닐 경우 0을 반환하는 함수		|   &check; 	|
+| isascii   	| int ft_isascii(int c)   	|인자가 아스키코드에 해당하는 문자일 경우 1을, 아닐 경우 0을 반환하는 함수	|          		|
+| isisprint 	| int ft_isprint(int c)   	|인자가 알파벳 혹은 숫자(0~9)일 경우 1을, 아닐 경우 0을 반환하는 함수		|          		|

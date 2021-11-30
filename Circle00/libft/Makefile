@@ -6,22 +6,23 @@
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #   reated: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-#    Updated: 2021/11/29 20:07:37 by minsuki2         ###   ########.fr        #
+#    Updated: 2021/11/30 18:47:28 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
-RM = rm -f
-ARFLAGS = rcs
-INC = -I./
+ARFLAGS = rcus
+INC = -I
+HEAD_DIR = ./
+INCLUDES = libft.h
 
 #-------------------------------Part1
 FILES =	ft_isalpha		\
 		ft_isdigit		\
-		ft_isalnum		\
-		ft_isascii		\
+		ft_isalnum
+#		ft_isascii		\
 		ft_isprint		\
 		ft_strlen		\
 		ft_memset		\
@@ -43,7 +44,7 @@ FILES =	ft_isalpha		\
 		ft_strdup
 
 #-------------------------------Part2
-FILES += ft_substr		\
+#FILES += ft_substr		\
 		 ft_strjoin		\
 		 ft_strtrim		\
 		 ft_split		\
@@ -53,25 +54,27 @@ FILES += ft_substr		\
 		 ft_putstr_fd	\
 		 ft_putendl_fd	\
 		 ft_putnbr_fd
-
+TARGET = a.out
 CURRENT_DIR = ./
 SRCS = $(addprefix $(CURRENT_DIR), $(addsuffix .c, $(FILES)))
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+%.a: $(OBJS)
+	@echo $% making...
+	$(AR) $(ARFLAGS) $@ $^
 
-%.a : %.o
-	$(AR) $(ARFLAGS)
+exe: $(TARGET)
 
-list:
-	@echo $(FILES)
+$(TARGET): $(OBJS) main.c
+	$(CC) $^ ../main.c -o $@
+
+%.o: %.c $(HEAD_DIR)$(INCLUDES)
 	@echo
-	@echo $(SRCS)
-	@echo
-	@echo $(OBJS)
-	@echo
+	@echo '$< -> $@'
+	@echo $^
+	$(CC) $(INC)$(HEAD_DIR) $(CFLAGS) -c $<
 
 clean:
 	$(RM) $(CURRENT_DIR)*.o
@@ -80,5 +83,3 @@ fclean: clean
 	$(RM) $(CURRENT_DIR)$(NAME)
 
 re: fclean all
-
-$(OBJS): $(SRCS) libft.h

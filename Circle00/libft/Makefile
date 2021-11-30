@@ -6,7 +6,7 @@
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #   reated: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-#    Updated: 2021/11/30 18:47:28 by minsuki2         ###   ########.fr        #
+#    Updated: 2021/11/30 19:51:35 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,3 +83,5 @@ fclean: clean
 	$(RM) $(CURRENT_DIR)$(NAME)
 
 re: fclean all
+
+$(OBJS): $(SRCS) $(HEAD_DIR)$(INCLUDES)

@@ -6,7 +6,7 @@
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #   reated: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-#    Updated: 2021/11/30 20:25:23 by minsuki2         ###   ########.fr        #
+#    Updated: 2021/12/01 18:09:26 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,9 @@ INCLUDES = libft.h
 #-------------------------------Part1
 FILES =	ft_isalpha		\
 		ft_isdigit		\
-		ft_isalnum
-#		ft_isascii		\
-		ft_isprint		\
+		ft_isalnum		\
+		ft_isascii
+	#	ft_isprint		\
 		ft_strlen		\
 		ft_memset		\
 		ft_bzero		\
@@ -61,19 +61,23 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
+$(NAME): $(OBJS)
+	@echo $@ Making...
+	$(AR) $(ARFLAGS) $@ $^
+
+
 %.a: $(OBJS)
-	@echo $% making...
+	@echo $@ Making...
 	$(AR) $(ARFLAGS) $@ $^
 
 exe: $(TARGET)
 
-$(TARGET): $(OBJS) main.c
-	$(CC) $^ ../main.c -o $@
+%.out: $(OBJS)
+	@echo $@ Making...
+	$(CC) $^ ../main.c
 
 %.o: %.c $(HEAD_DIR)$(INCLUDES)
-	@echo
-	@echo '$< -> $@'
-	@echo $^
+	@echo $@ Making
 	$(CC) $(INC)$(HEAD_DIR) $(CFLAGS) -c $<
 
 clean:
@@ -83,5 +87,3 @@ fclean: clean
 	$(RM) $(CURRENT_DIR)$(NAME)
 
 re: fclean all
-
-$(OBJS): $(SRCS) $(HEAD_DIR)$(INCLUDES)

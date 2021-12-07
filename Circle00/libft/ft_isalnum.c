@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:14:41 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/01 17:56:48 by minsuki2         ###   ########.fr       */
+/*   Updated: 2021/12/07 15:39:51 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,3 @@ int	ft_isalnum(int c)
 {
 	return(ft_isalpha(c) || ft_isdigit(c));
 }
-

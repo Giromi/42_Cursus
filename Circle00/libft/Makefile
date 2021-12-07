@@ -6,7 +6,7 @@
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-#    Updated: 2021/12/02 21:40:00 by minsuki2         ###   ########.fr        #
+#    Updated: 2021/12/07 17:46:49 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS =	ft_isalpha.c	\
 		ft_strlen.c		\
 		ft_memset.c		\
 		ft_bzero.c		\
-		ft_memcpy.c		\
+		ft_memcpy.c	#	\
 		ft_memmove.c	\
 		ft_strlcpy.c	\
 		ft_strlcat.c	\
@@ -43,7 +43,7 @@ SRCS =	ft_isalpha.c	\
 		ft_strdup.c
 
 #-------------------------------Part2
-SRCS += ft_substr.c		\
+#SRCS += ft_substr.c		\
 		ft_strjoin.c	\
 		ft_strtrim.c	\
 		ft_itoa.c		\
@@ -66,6 +66,7 @@ SRCS_BONUS = ft_lstnew.c		\
 			 ft_lstmap.c
 
 OBJS = $(SRCS:.c=.o)
+TARGET = a.out
 all: $(NAME)
 $(NAME): $(OBJS)
 	@echo $@ Making... $
@@ -78,6 +79,11 @@ clean:
 
 fclean: clean
 	$(RM) $(CURRENT_DIR)$(NAME)
+
+exe: $(TARGET)
+
+$(TARGET): $(NAME) ../main.c libft.h
+	$(CC) $< ../main.c $(INC)$(CURRENT_DIR)
 
 re: fclean all
 

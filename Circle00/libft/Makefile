@@ -14,9 +14,13 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
 ARFLAGS = rcus
-INC = -I
 CURRENT_DIR = ./
-INCLUDES = libft.h
+INCLUDES = ./libft.h
+MAIN = ../main.c
+INC = -I./
+
+#수정요망-------------------------------
+#-------------------------------
 
 #-------------------------------Part1
 SRCS =	ft_isalpha.c	\
@@ -67,14 +71,14 @@ SRCS_BONUS = ft_lstnew.c		\
 			 ft_lstmap.c
 
 OBJS = $(SRCS:.c=.o)
-TARGET = a.out
+TARGET = a.exe
 all: $(NAME)
 $(NAME): $(OBJS)
 	@echo $@ Making... $
 	$(AR) $(ARFLAGS) $@ $^
 %.o: %.c $(CURRENT_DIR)$(INCLUDES)
 	@echo $@ Making
-	$(CC) $(INC)$(CURRENT_DIR) $(CFLAGS) -c $<
+	$(CC) $(INC) $(CFLAGS) -c $<
 clean:
 	$(RM) $(OBJS) $(SRCS_BONUS:.c=.o)
 
@@ -83,12 +87,12 @@ fclean: clean
 
 exe: $(TARGET)
 
-$(TARGET): $(NAME) ../main.c libft.h
-	$(CC) $< ../main.c $(INC)$(CURRENT_DIR)
+$(TARGET): $(NAME) $(MAIN) $(INCLUDES)
+	$(CC) $(MAIN) -L./ -lft 
 
 re: fclean all
 
 bonus: $(OBJS)
 	@make "SRCS = $(SRCS) $(SRCS_BONUS)" all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus exe

@@ -15,6 +15,9 @@
 void	*ft_memset(void *b, int c, size_t len)
 {
 	while (len--)
-		((unsigned char*)b)[len] = c;
+		*((unsigned char*)b + len) = c;
 	return (b);
 }
+
+//포인터는 ++ 하면 계속 읽을 수 있음
+//배열은 ++하면 

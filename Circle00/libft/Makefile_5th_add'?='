@@ -1,0 +1,105 @@
+
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
+#    Updated: 2021/12/09 18:25:32 by minsuki2         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+NAME = libft.a
+ARFLAGS = rcus
+CURRENT_DIR = ./
+INCLUDES = ./libft.h
+MAIN = ../main.c
+INC = -I./
+
+#수정요망-------------------------------
+#-------------------------------
+
+#-------------------------------Part1
+SRCS_FILES = ft_isalpha.c	\
+			 ft_isdigit.c	\
+			 ft_isalnum.c	\
+			 ft_isascii.c	\
+			 ft_isprint.c	\
+			 ft_strlen.c	\
+			 ft_memset.c	\
+			 ft_bzero.c		\
+			 ft_memcpy.c	\
+			 ft_memmove.c	\
+			 ft_strlcpy.c	\
+			 ft_strlcat.c	\
+			 ft_toupper.c	\
+			 ft_tolower.c	\
+			 ft_strchr.c	\
+			 ft_strrchr.c	\
+			 ft_strncmp.c	\
+			 ft_memchr.c	\
+			 ft_memcmp.c	\
+			 ft_strnstr.c	\
+			 ft_atoi.c		\
+			 ft_calloc.c	\
+			 ft_strdup.c
+
+#-------------------------------Part2
+#SRCS_FILES += ft_substr.c		\
+		ft_strjoin.c	\
+		ft_strtrim.c	\
+		ft_itoa.c		\
+		ft_split.c		\
+		ft_strmapi.c	\
+		ft_putchar_fd.c	\
+		ft_putstr_fd.c	\
+		ft_putendl_fd.c	\
+		ft_putnbr_fd.c
+
+#-------------------------------Bonus
+BONUS_SRCS_FILES = ft_lstnew.c		\
+			 	   ft_lstadd_front.c	\
+			 	   ft_lstsize.c		\
+			 	   ft_lstlast.c		\
+			 	   ft_lstadd_back.c	\
+			 	   ft_lstdelone.c		\
+			 	   ft_lstclear.c		\
+			 	   ft_lstmap.c
+
+SRCS ?= $(SRCS_FILES)
+
+OBJS = $(SRCS:.c=.o)
+TARGET = a.out
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	@echo $@ Making...
+	@echo
+	@echo $^
+	@echo
+	$(AR) $(ARFLAGS) $@ $^
+
+%.o: %.c $(CURRENT_DIR)$(INCLUDES)
+	@echo $@ Making...
+	$(CC) $(INC) $(CFLAGS) -c $<
+
+clean:
+	$(RM) $(OBJS) $(SRCS_BONUS:.c=.o)
+
+fclean: clean
+	$(RM) $(CURRENT_DIR)$(NAME)
+
+exe: $(TARGET)
+
+$(TARGET): $(NAME) $(MAIN) $(INCLUDES)
+	$(CC) $(MAIN) -L./ -lft
+
+re: fclean all
+
+bonus:
+@make "SRCS_ALL = $(SRCS_FILES) $(BONUS_SRCS_FILES)" all
+.PHONY: all clean fclean re bonus exe

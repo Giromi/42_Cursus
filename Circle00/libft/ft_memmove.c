@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 00:42:02 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/08 00:42:02 by minsuki2         ###   ########.fr       */
+/*   Updated: 2021/12/09 16:39:15 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void    *ft_memmove(void *dst, const void *src, size_t len)
 {
+	if (dst <
+	while (
+
 
 }
 

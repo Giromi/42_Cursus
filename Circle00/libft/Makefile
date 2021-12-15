@@ -6,7 +6,7 @@
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-#    Updated: 2021/12/13 22:30:51 by minsuki2         ###   ########.fr        #
+#    Updated: 2021/12/15 13:40:43 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,10 +39,10 @@ SRCS_FILES = ft_isalpha.c	\
 			 ft_tolower.c	\
 			 ft_strchr.c	\
 			 ft_strrchr.c	\
+			 ft_memchr.c	\
 			 ft_strlcpy.c	#\
 			 ft_strlcat.c	\
 			 ft_strncmp.c	\
-			 ft_memchr.c	\
 			 ft_memcmp.c	\
 			 ft_strnstr.c	\
 			 ft_atoi.c		\

@@ -6,9 +6,10 @@
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-#    Updated: 2021/12/15 14:26:01 by minsuki2         ###   ########.fr        #
+#    Updated: 2021/12/20 16:45:46 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -41,11 +42,11 @@ SRCS_FILES = ft_isalpha.c	\
 			 ft_strrchr.c	\
 			 ft_memchr.c	\
 			 ft_strlcpy.c	\
-			 ft_strlcat.c	#\
+			 ft_strlcat.c	\
 			 ft_strncmp.c	\
 			 ft_memcmp.c	\
+			 ft_atoi.c		#\
 			 ft_strnstr.c	\
-			 ft_atoi.c		\
 			 ft_calloc.c	\
 			 ft_strdup.c
 
@@ -81,8 +82,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo $@ Making...
-	@echo
-	@echo $^
+	@echo @echo $^
 	@echo
 	$(AR) $(ARFLAGS) $@ $^
 
@@ -99,11 +99,10 @@ fclean: clean
 exe: $(TARGET)
 
 $(TARGET): $(NAME) $(MAIN) $(INCLUDES)
-	$(CC) $(MAIN) -L./ -lft
+	$(CC) -g $(MAIN) -L./ -lft
 
 re: fclean all
 
 bonus:
 	@make "SCRS = $(SRCS_FILES) $(BONUS_SRCS_FILES)" all #-p > makefile.txt
-
 .PHONY: all clean fclean re bonus exe

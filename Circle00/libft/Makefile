@@ -6,7 +6,7 @@
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-#    Updated: 2021/12/23 03:58:40 by minsuki2         ###   ########.fr        #
+#    Updated: 2021/12/23 05:31:17 by minsuki2         ###   ########.fr        #
 #    Updated: 2021/12/20 16:45:46 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -19,7 +19,6 @@ CURRENT_DIR = ./
 INCLUDES = ./libft.h
 MAIN = ../Main/main.c
 INC = -I./
-MAKE = ./make
 
 #수정요망-------------------------------
 TARGET = a.out
@@ -63,7 +62,7 @@ SRCS_FILES = ft_isalpha.c	\
 		ft_putnbr_fd.c
 
 #-------------------------------Bonus
-#BONUS_SRCS_FILES = ft_lstnew.c			\
+BONUS_SRCS_FILES = ft_lstnew.c			\
 			 	   ft_lstadd_front.c	\
 			 	   ft_lstsize.c			\
 			 	   ft_lstlast.c			\
@@ -82,8 +81,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo $@ Making...
-	@echo @echo $^
-	@echo
+	@echo $^
 	$(AR) $(ARFLAGS) $@ $^
 
 %.o: %.c $(CURRENT_DIR)$(INCLUDES)

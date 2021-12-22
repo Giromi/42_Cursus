@@ -6,7 +6,7 @@
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-#    Updated: 2021/12/15 14:26:01 by minsuki2         ###   ########.fr        #
+#    Updated: 2021/12/16 10:52:36 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,12 +98,12 @@ fclean: clean
 
 exe: $(TARGET)
 
-$(TARGET): $(NAME) $(MAIN) $(INCLUDES)
-	$(CC) $(MAIN) -L./ -lft
+%.out: $(NAME) $(MAIN) $(INCLUDES)
+	$(CC) -g $(MAIN) -L./ -lft
 
 re: fclean all
 
 bonus:
-	@make "SCRS = $(SRCS_FILES) $(BONUS_SRCS_FILES)" all #-p > makefile.txt
+	@$(MAKE) "SCRS = $(SRCS_FILES) $(BONUS_SRCS_FILES)" all #-p > makefile.txt
 
 .PHONY: all clean fclean re bonus exe

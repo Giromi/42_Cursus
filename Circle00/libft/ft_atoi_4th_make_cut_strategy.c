@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 12:27:51 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/23 05:18:24 by minsuki2         ###   ########.fr       */
+/*   Updated: 2021/12/23 05:15:54 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,12 @@ int	ft_atoi(const char *str)
 	while (ft_isdigit(str[i]) && str[i])
 	{
 		c = str[i] - '0';
+		printf("num : %ld          \t?          front : %ld\n", num, (long)(over_value / 10));
+		printf("c   : %d          \t?          left   : %d\n", c, (int)(over_value % 10));
 		if (num > (long)(over_value / 10) || (num == (long)(over_value / 10)
 					&& c > (int)(over_value % 10)))
 		{
+			printf("Over flow\n");
 			return (sign * (int)over_value);
 		}
 		num = num * 10 + c;

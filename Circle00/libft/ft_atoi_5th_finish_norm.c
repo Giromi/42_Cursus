@@ -6,44 +6,54 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 12:27:51 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/20 18:14:48 by minsuki2         ###   ########.fr       */
+/*   Updated: 2021/12/23 05:18:01 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-static int	ft_isspace(int c);
-static int	plma_check(int c, int *sign);
+static	int		plma_check(int c, int *sign);
+static	int		ft_isspace(int c);
+static	size_t	make_max(int *ptr);
 
 int	ft_atoi(const char *str)
 {
-	size_t	i;
-	long	num;
-	long	tmp;
 	int		sign;
+	int		c;
+	long	num;
+	size_t	i;
+	size_t	over_value;
 
 	i = 0;
 	num = 0;
 	sign = 1;
 	while (ft_isspace(str[i]))
-			i++;
+		i++;
 	i += plma_check(str[i], &sign);
+	over_value = make_max(&sign);
 	while (ft_isdigit(str[i]) && str[i])
 	{
-		tmp = num;
-		num = num * 10 + str[i] - '0';
-		if (num < tmp)
+		c = str[i] - '0';
+		if (num > (long)(over_value / 10) || (num == (long)(over_value / 10)
+					&& c > (int)(over_value % 10)))
 		{
-			printf("over\n");
-			if (sign == -1)
-				return (LONG_MIN);
-			else
-				return (LONG_MAX);
+			return (sign * (int)over_value);
 		}
+		num = num * 10 + c;
 		i++;
 	}
 	return (sign * num);
+}
+
+static	size_t	make_max(int *ptr)
+{
+	size_t	tmp_max;
+
+	if (*ptr == -1)
+		tmp_max = LONG_MIN;
+	else
+		tmp_max = LONG_MAX;
+	return (tmp_max);
 }
 
 static	int	ft_isspace(int c)

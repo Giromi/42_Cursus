@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 11:01:03 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/20 15:02:25 by minsuki2         ###   ########.fr       */
+/*   Updated: 2021/12/22 17:52:03 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+//-----
+# include <stdio.h>
+//-----
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);

@@ -6,17 +6,24 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 10:00:42 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/20 17:19:29 by minsuki2         ###   ########.fr       */
+/*   Updated: 2021/12/23 04:59:01 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include <stdio.h>
+#include "libft.h"
+//#include "../libft/libft.h"
 #include <string.h>
 
 int main(int ac, char *av[])
 {
 	printf("re : %d\n", atoi(av[1]));
 	printf("my : %d\n", ft_atoi(av[1]));
+	/** printf("%zu\n", LONG_MIN); */
 	return (0);
 }
+//LONG_MIN : -9223372036854775808
+//LONG_MAX : 9223372036854775807
+//27670116110564327422 : -2 (wrong)
+// 9223372036854775807
+//27670116110564327423 : -1
+//27670116110564327424 : -1 (over)

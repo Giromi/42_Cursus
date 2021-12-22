@@ -6,15 +6,11 @@
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-<<<<<<< HEAD:Circle00/libft/Makefile_backup
-#    Updated: 2021/12/16 10:52:36 by minsuki2         ###   ########.fr        #
-=======
+#    Updated: 2021/12/22 15:59:55 by minsuki2         ###   ########.fr        #
 #    Updated: 2021/12/20 16:45:46 by minsuki2         ###   ########.fr        #
->>>>>>> 143a952f1081b07294b723f3a2564a24b4300ea0:Circle00/libft/Makefile
 #                                                                              #
 # **************************************************************************** #
-
-
+#
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
@@ -102,20 +98,13 @@ fclean: clean
 
 exe: $(TARGET)
 
-<<<<<<< HEAD:Circle00/libft/Makefile_backup
 %.out: $(NAME) $(MAIN) $(INCLUDES)
-=======
 $(TARGET): $(NAME) $(MAIN) $(INCLUDES)
->>>>>>> 143a952f1081b07294b723f3a2564a24b4300ea0:Circle00/libft/Makefile
 	$(CC) -g $(MAIN) -L./ -lft
 
 re: fclean all
 
 bonus:
-<<<<<<< HEAD:Circle00/libft/Makefile_backup
 	@$(MAKE) "SCRS = $(SRCS_FILES) $(BONUS_SRCS_FILES)" all #-p > makefile.txt
 
-=======
-	@make "SCRS = $(SRCS_FILES) $(BONUS_SRCS_FILES)" all #-p > makefile.txt
->>>>>>> 143a952f1081b07294b723f3a2564a24b4300ea0:Circle00/libft/Makefile
 .PHONY: all clean fclean re bonus exe

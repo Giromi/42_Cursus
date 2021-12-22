@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/20 09:00:20 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/20 12:27:18 by minsuki2         ###   ########.fr       */
+/*   Created: 2021/12/20 10:00:42 by minsuki2          #+#    #+#             */
+/*   Updated: 2021/12/20 17:19:29 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft/libft.h"
+#include <stdio.h>
+#include <string.h>
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int main(int ac, char *av[])
 {
-	size_t	i;
-
-	i = 0;
-	if ( n > 0 )
-		while (n-- && (s1[i] || s2[i]))
-		{
-			if (s1[i] != s2[i])
-				return (s1[i] - s2[i]);
-			i++;
-		}
+	printf("re : %d\n", atoi(av[1]));
+	printf("my : %d\n", ft_atoi(av[1]));
 	return (0);
 }
-

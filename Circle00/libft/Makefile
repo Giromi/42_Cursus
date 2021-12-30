@@ -6,7 +6,7 @@
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-#    Updated: 2021/12/30 18:12:29 by minsuki2         ###   ########.fr        #
+#    Updated: 2021/12/30 18:30:18 by minsuki2         ###   ########.fr        #
 #    Updated: 2021/12/20 16:45:46 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -80,7 +80,7 @@ OBJS = $(SRCS:.c=.o)
 #-------------------------------
 PUSH = $(wildcard ft_*_finish_norm*.c)
 TMP = $(wildcard $(PUSH_DIR)*.c)
-DONE = $(TMP:PUSH_VER/%=%)
+DONE = $(TMP:$(PUSH_DIR)%=%)
 
 all: $(NAME)
 
@@ -110,7 +110,7 @@ push: $(PUSH)
 	@echo $^ Copying... | sed 's/ /\n/g'
 	@cp $^ $(PUSH_DIR)
 	@rename -f 's/_[1-9](st|nd|rd|th)_finish_norm//' $(PUSH_DIR)*
-	@ls -1 $(PUSH_DIR)
+#@ls -1 $(PUSH_DIR)
 
 bring:
 	cp $(PUSH_DIR)*.c .

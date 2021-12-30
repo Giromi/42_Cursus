@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr_2nd_finish_norm.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/30 10:32:03 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/01 17:49:53 by minsuki2         ###   ########.fr       */
+/*   Created: 2021/12/13 21:49:27 by minsuki2          #+#    #+#             */
+/*   Updated: 2021/12/30 18:29:55 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalpha(int c)
+char	*ft_strrchr(const char *s, int c)
 {
-	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+	size_t	len;
+
+	len = ft_strlen(s) + 1;
+	while (len--)
+		if (s[len] == c)
+			return (&((char *)s)[len]);
+	return (0);
 }

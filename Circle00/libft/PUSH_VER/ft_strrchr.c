@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr_1st_no_strlen.c                          :+:      :+:    :+:   */
+/*   ft_strrchr_2nd_finish_norm.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/13 21:49:01 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/14 16:59:38 by minsuki2         ###   ########.fr       */
+/*   Created: 2021/12/13 21:49:27 by minsuki2          #+#    #+#             */
+/*   Updated: 2021/12/30 18:29:55 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
-	size_t	i;
+	size_t	len;
 
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == (char)c)
-			return (&((char *)s)[i]);
-		i++;
-	}
-	if ( (char)c == '\0')
-		return (&((char *)s)[i]);
-	return (NULL);
+	len = ft_strlen(s) + 1;
+	while (len--)
+		if (s[len] == c)
+			return (&((char *)s)[len]);
+	return (0);
 }

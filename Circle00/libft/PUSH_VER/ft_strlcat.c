@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr_1st_finish.c                             :+:      :+:    :+:   */
+/*   ft_strlcat_3rd_.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/15 12:36:46 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/30 19:01:16 by minsuki2         ###   ########.fr       */
+/*   Created: 2021/12/15 13:43:32 by minsuki2          #+#    #+#             */
+/*   Updated: 2021/12/15 22:48:22 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	size_t	i;
+	size_t	dstLen;
+	size_t	srcLen;
+	size_t	offsetLen;
 
-	i = 0;
-	while (i < n)
+	dstLen = ft_strlen(dst);
+	srcLen = ft_strlen(src);
+	offsetLen = 0;
+	if (dstLen + 1 <= dstsize)
 	{
-		if (((unsigned char *)s)[i] == c)
-			return (&((unsigned char *)s)[i]);
-		i++;
+		while (dstLen + offsetLen < dstsize && src[offsetLen - 1])
+		{
+			dst[dstLen + offsetLen - 1] = src[offsetLen];
+			offsetLen++;
+		}
+		dst[(dstLen + offsetLen) - 1] = '\0';
 	}
-	return (NULL);
+	else
+		dstLen = dstsize;
+	return (dstLen + srcLen);
 }
+

@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr_1st_finish.c                             :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/15 12:36:46 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/30 19:01:16 by minsuki2         ###   ########.fr       */
+/*   Created: 2021/12/07 15:51:47 by minsuki2          #+#    #+#             */
+/*   Updated: 2021/12/08 03:09:51 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < n)
-	{
-		if (((unsigned char *)s)[i] == c)
-			return (&((unsigned char *)s)[i]);
-		i++;
-	}
-	return (NULL);
+	while (n--)
+		((unsigned char*)s)[n] = 0;
 }
+

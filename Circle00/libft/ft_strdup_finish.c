@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr_1st_finish.c                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/15 12:36:46 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/30 19:01:16 by minsuki2         ###   ########.fr       */
+/*   Created: 2021/12/29 17:18:13 by minsuki2          #+#    #+#             */
+/*   Updated: 2021/12/29 17:42:35 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+char	*ft_strdup(const char *s1)
 {
-	size_t	i;
+	char	*dup;
+	size_t	size;
 
-	i = 0;
-	while (i < n)
-	{
-		if (((unsigned char *)s)[i] == c)
-			return (&((unsigned char *)s)[i]);
-		i++;
-	}
-	return (NULL);
+	size = ft_strlen(s1) + 1;
+	dup = malloc(sizeof(char) * size);
+	dup[size] = '\0';
+	while (size--)
+		dup[size] = s1[size];
+	return (dup);
 }

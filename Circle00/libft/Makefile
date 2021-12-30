@@ -6,7 +6,7 @@
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-#    Updated: 2021/12/30 18:30:18 by minsuki2         ###   ########.fr        #
+#    Updated: 2021/12/30 22:07:33 by minsuki2         ###   ########.fr        #
 #    Updated: 2021/12/20 16:45:46 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -78,7 +78,7 @@ SRCS ?= $(SRCS_FILES)
 OBJS = $(SRCS:.c=.o)
 
 #-------------------------------
-PUSH = $(wildcard ft_*_finish_norm*.c)
+PUSH = $(wildcard ft_*_finish.c)
 TMP = $(wildcard $(PUSH_DIR)*.c)
 DONE = $(TMP:$(PUSH_DIR)%=%)
 
@@ -93,7 +93,7 @@ $(NAME): $(OBJS)
 	$(CC) $(INC) $(CFLAGS) -c $<
 
 # exe---------------------------------------------
-exe: push $(TARGET)
+exe: $(TARGET)
 
 $(TARGET): $(NAME) $(MAIN) $(INCLUDES)
 	@echo --------------------------------
@@ -109,27 +109,31 @@ push: $(PUSH)
 	@echo --------------------------------
 	@echo $^ Copying... | sed 's/ /\n/g'
 	@cp $^ $(PUSH_DIR)
-	@rename -f 's/_[1-9](st|nd|rd|th)_finish_norm//' $(PUSH_DIR)*
+	@rename -f 's/_finish//' $(PUSH_DIR)*
+#@rename -f 's/_[2-9](st|nd|rd|th)_finish//' $(PUSH_DIR)*
 #@ls -1 $(PUSH_DIR)
 
 bring:
 	cp $(PUSH_DIR)*.c .
 
 pclean:
-	@echo $(DONE) | sed 's/ /\n/g'
+#@echo $(DONE) | sed 's/ /\n/g'
+	@echo
 	$(RM) $(DONE)
 
 # clean--------------------------------------------
 
 clean:
+	@echo
 	$(RM) $(SRCS_FILES:.c=.o) $(BONUS_SRCS_FILES:.c=.o)
 
 fclean: clean pclean
+	@echo
 	$(RM) $(CURRENT_DIR)$(NAME)
 
-re: fclean all exe
+re: fclean bring all exe
 
 bonus:
 	@$(MAKE) "SCRS = $(SRCS_FILES) $(BONUS_SRCS_FILES)" all #-p > makefile.txt
 
-.PHONY: all clean fclean re bonus exe
+.PHONY: all clean fclean re bonus push bring pclean exe

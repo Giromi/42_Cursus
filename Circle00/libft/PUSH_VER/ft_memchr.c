@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr_2nd_finish_norm_using_size.c             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/13 21:49:01 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/30 18:14:31 by minsuki2         ###   ########.fr       */
+/*   Created: 2021/12/15 12:36:46 by minsuki2          #+#    #+#             */
+/*   Updated: 2021/12/15 13:37:11 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
 	size_t	i;
 
 	i = 0;
-	while (s[i])
+	while (i < n)
 	{
-		if (s[i] == (char)c)
-			return (&((char *)s)[i]);
+		if (((unsigned char *)s)[i] == c)
+			return (&((unsigned char *)s)[i]);
 		i++;
 	}
-	if ( (char)c == '\0')
-		return (&((char *)s)[i]); //
 	return (NULL);
 }

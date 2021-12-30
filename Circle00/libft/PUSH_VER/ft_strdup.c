@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr_2nd_finish_norm_using_size.c             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/13 21:49:01 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/30 18:14:31 by minsuki2         ###   ########.fr       */
+/*   Created: 2021/12/29 17:18:13 by minsuki2          #+#    #+#             */
+/*   Updated: 2021/12/29 17:42:35 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strdup(const char *s1)
 {
-	size_t	i;
+	char	*dup;
+	size_t	size;
 
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == (char)c)
-			return (&((char *)s)[i]);
-		i++;
-	}
-	if ( (char)c == '\0')
-		return (&((char *)s)[i]); //
-	return (NULL);
+	size = ft_strlen(s1) + 1;
+	dup = malloc(sizeof(char) * size);
+	dup[size] = '\0';
+	while (size--)
+		dup[size] = s1[size];
+	return (dup);
 }

@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr_2nd_finish_norm_using_size.c             :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/13 21:49:01 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/30 18:14:31 by minsuki2         ###   ########.fr       */
+/*   Created: 2021/11/30 12:14:41 by minsuki2          #+#    #+#             */
+/*   Updated: 2021/12/10 20:52:08 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+int	ft_isalnum(int c)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == (char)c)
-			return (&((char *)s)[i]);
-		i++;
-	}
-	if ( (char)c == '\0')
-		return (&((char *)s)[i]); //
-	return (NULL);
+	return(ft_isalpha(c) || ft_isdigit(c));
 }

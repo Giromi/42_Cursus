@@ -6,25 +6,18 @@
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-#    Updated: 2021/12/30 17:47:21 by minsuki2         ###   ########.fr        #
+#    Updated: 2021/12/30 15:47:13 by minsuki2         ###   ########.fr        #
 #    Updated: 2021/12/20 16:45:46 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-#
+
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
 ARFLAGS = rcus
 CURRENT_DIR = ./
 INCLUDES = ./libft.h
-MAIN = ../Main/main.c
 INC = -I./
-
-#Delete-----------------------------------
-TARGET = a.out
-PUSH_DIR = PUSH_VER/
-
-#-------------------------------
 
 #-------------------------------Part1
 SRCS_FILES = ft_isalpha.c	\
@@ -55,7 +48,7 @@ SRCS_FILES = ft_isalpha.c	\
 SRCS_FILES += ft_putchar_fd.c	\
 			  ft_putstr_fd.c	\
 			  ft_putnbr_fd.c	\
-			  ft_putendl_fd.c	#\
+			  ft_putendl_fd.c	\
 			  ft_substr.c		\
 			  ft_strjoin.c		\
 			  ft_strtrim.c		\
@@ -78,57 +71,28 @@ SRCS ?= $(SRCS_FILES)
 OBJS = $(SRCS:.c=.o)
 
 #-------------------------------
-PUSH = $(wildcard ft_*_finish_norm*.c)
-TMP = $(wildcard $(PUSH_DIR)*.c)
-DONE = $(TMP:PUSH_VER/%=%)
+PUSH = $(wildcard ft_*_finish_norm.c)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@echo --------------------------------
 	@echo $@ Making...
+	@echo $^
 	$(AR) $(ARFLAGS) $@ $^
 
 %.o: %.c $(CURRENT_DIR)$(INCLUDES)
-	$(CC) $(INC) $(CFLAGS) -c $<
-
-# exe---------------------------------------------
-exe: push $(TARGET)
-
-$(TARGET): $(NAME) $(MAIN) $(INCLUDES)
-	@echo --------------------------------
 	@echo $@ Making...
-	$(CC) -g $(MAIN) -I../libft/ -L./ -lft
-
-%.out: %.c $(MAIN) $(INCLUDES)
-	$(CC) -g $(MAIN) -I../libft $< -L./ -lft
-
-
-# push---------------------------------------------
-push: $(PUSH)
-	@echo --------------------------------
-	@echo $^ Copying... | sed 's/ /\n/g'
-	@cp $^ $(PUSH_DIR)
-	@rename -f 's/_[1-9](st|nd|rd|th)_finish_norm*\.c/\.c/' $(PUSH_DIR)*
-
-bring:
-	cp $(PUSH_DIR)*.c .
-
-pclean:
-	@echo $(DONE) | sed 's/ /\n/g'
-	$(RM) $(DONE)
-
-# clean--------------------------------------------
+	$(CC) $(INC) $(CFLAGS) -c $<
 
 clean:
 	$(RM) $(SRCS_FILES:.c=.o) $(BONUS_SRCS_FILES:.c=.o)
 
-fclean: clean pclean
+fclean: clean
 	$(RM) $(CURRENT_DIR)$(NAME)
 
-re: fclean all exe
+re: fclean all
 
 bonus:
-	@$(MAKE) "SCRS = $(SRCS_FILES) $(BONUS_SRCS_FILES)" all #-p > makefile.txt
+	@$(MAKE) "SCRS = $(SRCS_FILES) $(BONUS_SRCS_FILES)" all
 
 .PHONY: all clean fclean re bonus exe

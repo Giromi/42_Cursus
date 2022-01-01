@@ -1,19 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strlcat_2nd_return_just_one.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/29 17:51:37 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/29 17:54:10 by minsuki2         ###   ########.fr       */
+/*   Created: 2021/12/15 13:43:32 by minsuki2          #+#    #+#             */
+/*   Updated: 2021/12/15 18:40:55 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	if (fd >= 0)
-		write(fd, &c, 1);
+	size_t	dstLen;
+	size_t	srcLen;
+	size_t	i;
+
+	dstLen = ft_strlen(dst);
+	srcLen = ft_strlen(src);
+	i = 0;
+	if (dstLen <= dstsize - 1)
+	{
+		while (i + dstLen < dstsize && src[i])
+		{
+			dst[i + dstLen] = src[i];
+			i++;
+		}
+		dst[i + dstLen - 1] = '\0';
+	}
+	else
+		dstLen = dstsize;
+	return (dstLen + srcLen);
 }
+

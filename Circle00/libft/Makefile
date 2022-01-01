@@ -6,7 +6,7 @@
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-#    Updated: 2021/12/30 22:07:33 by minsuki2         ###   ########.fr        #
+#    Updated: 2022/01/02 00:44:25 by minsuki2         ###   ########.fr        #
 #    Updated: 2021/12/20 16:45:46 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -55,9 +55,9 @@ SRCS_FILES = ft_isalpha.c	\
 SRCS_FILES += ft_putchar_fd.c	\
 			  ft_putstr_fd.c	\
 			  ft_putnbr_fd.c	\
-			  ft_putendl_fd.c	#\
+			  ft_putendl_fd.c	\
 			  ft_substr.c		\
-			  ft_strjoin.c		\
+			  ft_strjoin.c		#\
 			  ft_strtrim.c		\
 			  ft_itoa.c			\
 			  ft_split.c		\
@@ -127,11 +127,11 @@ clean:
 	@echo
 	$(RM) $(SRCS_FILES:.c=.o) $(BONUS_SRCS_FILES:.c=.o)
 
-fclean: clean pclean
+fclean: clean
 	@echo
 	$(RM) $(CURRENT_DIR)$(NAME)
 
-re: fclean bring all exe
+re: fclean all exe
 
 bonus:
 	@$(MAKE) "SCRS = $(SRCS_FILES) $(BONUS_SRCS_FILES)" all #-p > makefile.txt

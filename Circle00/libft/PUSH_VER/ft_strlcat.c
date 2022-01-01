@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat_3rd_.c                                  :+:      :+:    :+:   */
+/*   ft_strlcat_finish.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 13:43:32 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/15 22:48:22 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/01 23:34:19 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,21 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	size_t	dstLen;
-	size_t	srcLen;
-	size_t	offsetLen;
+	size_t	dst_len;
+	size_t	src_len;
+	size_t	offset_len;
+	size_t	n;
 
-	dstLen = ft_strlen(dst);
-	srcLen = ft_strlen(src);
-	offsetLen = 0;
-	if (dstLen + 1 <= dstsize)
-	{
-		while (dstLen + offsetLen < dstsize && src[offsetLen - 1])
-		{
-			dst[dstLen + offsetLen - 1] = src[offsetLen];
-			offsetLen++;
-		}
-		dst[(dstLen + offsetLen) - 1] = '\0';
-	}
+	dst_len = ft_strlen(dst);
+	src_len = ft_strlen(src);
+	n = dstsize - dst_len;
+	offset_len = 0;
+	if (n >= 1)
+		while (src[offset_len++] && n-- -1)
+			dst[dst_len - 1 + offset_len] = src[offset_len - 1];
 	else
-		dstLen = dstsize;
-	return (dstLen + srcLen);
+		dst_len = dstsize;
+	dst[dst_len - 1 + offset_len] = '\0';
+	return (dst_len + src_len);
 }
 

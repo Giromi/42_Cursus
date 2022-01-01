@@ -1,4 +1,4 @@
-#include "libft/libft.h"
+#include "libft.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -6,27 +6,37 @@ size_t	strlcat_origin(char *dst, const char *src, size_t siz);
 
 int main(void)
 {
-	const char	src1[] = "3456";
-	const char	src2[] = "3456";
-	char		what1[] = "12";
-	char		what2[] = "12";
+	char		what1[8] = "12";
+	char		what2[8] = "12";
+	const char	src1[] = "test";
+	const char	src2[] = "test";
 	size_t		re_result;
 	size_t		my_result;
-		
+	size_t		n = 10;
+
 	printf("\n");
-	re_result = strlcat(what1, src1, 5);
-	my_result = ft_strlcat(what2, src2, 5);
+	re_result = strlcat(what1, src1, 8);
+	my_result = ft_strlcat(what2, src2, 8);
 	printf("--------------------\n");
 	printf("re num : %zu\n", re_result);
 	printf("my num : %zu\n", my_result);
 	printf("--------------------\n");
 	printf("re is:");
-	for(int i= 0; i < 20; i++)
-		printf("[%c]", what1[i]);
+	for(int i= 0; i < n; i++)
+		printf("[%c]\t", what1[i]);
+	printf("\n");
+	printf("re is:");
+	for(int i= 0; i < n; i++)
+		printf("[%d]\t", what1[i]);
+	printf("\n");
 	printf("\n");
 	printf("my is: ");
-	for(int i= 0; i< 20; i++)
-		printf("[%c]", what2[i]);
+	for(int i= 0; i< n; i++)
+		printf("[%c]\t", what2[i]);
+	printf("\n");
+	printf("my is: ");
+	for(int i= 0; i < n; i++)
+		printf("[%d]\t", what2[i]);
 	printf("\n");
 	printf("re : %s\n", what1);
 	printf("my : %s\n", what2);

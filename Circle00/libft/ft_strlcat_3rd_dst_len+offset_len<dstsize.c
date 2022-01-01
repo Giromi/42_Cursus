@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strlcat_finish.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/29 23:07:39 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/30 01:53:57 by minsuki2         ###   ########.fr       */
+/*   Created: 2021/12/15 13:43:32 by minsuki2          #+#    #+#             */
+/*   Updated: 2022/01/01 23:36:52 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	if (fd >= 0)
+	size_t	dst_len;
+	size_t	src_len;
+	size_t	offset_len;
+
+	dst_len = ft_strlen(dst);
+	src_len = ft_strlen(src);
+	offset_len = 0;
+	if (dst_len + 1 <= dstsize)
 	{
-		if (n > -10 && n < 10)
+		while (src[offset_len] && dst_len + offset_len < dstsize)
 		{
-			if (n < 0)
-			{
-				ft_putchar_fd('-', fd);
-				n *= -1;
-			}
-			ft_putchar_fd(n + '0', fd);
-			return ;
+			dst[dst_len + offset_len] = src[offset_len];
+			offset_len++;
 		}
-		ft_putnbr_fd(n / 10, fd);
-		if (n > 0)
-			ft_putchar_fd(n % 10 + '0', fd);
-		else
-			ft_putchar_fd(-(n % 10) + '0', fd);
+		dst[(dst_len + offset_len) - 1] = '\0';
 	}
+	else
+		dst_len = dstsize;
+	return (dst_len + src_len);
 }
+

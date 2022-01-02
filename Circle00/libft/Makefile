@@ -6,7 +6,7 @@
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-#    Updated: 2022/01/02 00:44:25 by minsuki2         ###   ########.fr        #
+#    Updated: 2022/01/02 23:15:04 by minsuki2         ###   ########.fr        #
 #    Updated: 2021/12/20 16:45:46 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -57,8 +57,8 @@ SRCS_FILES += ft_putchar_fd.c	\
 			  ft_putnbr_fd.c	\
 			  ft_putendl_fd.c	\
 			  ft_substr.c		\
-			  ft_strjoin.c		#\
-			  ft_strtrim.c		\
+			  ft_strjoin.c		\
+			  ft_strtrim.c		#\
 			  ft_itoa.c			\
 			  ft_split.c		\
 			  ft_strmapi.c

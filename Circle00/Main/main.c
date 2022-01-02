@@ -1,73 +1,38 @@
 #include "libft.h"
-#include <stdio.h>
-#include <string.h>
 
-size_t	strlcat_origin(char *dst, const char *src, size_t siz);
-
-int main(void)
+int main(int ac, char *av[])
 {
-	char		what1[8] = "like";
-	char		what2[8] = "like";
-	const char	src1[] = "You";
-	const char	src2[] = "You";
-	size_t		re_result;
-	size_t		my_result;
-	size_t		n = 10;
+	const char		what0[] = "teststart123123test123123";
+	const char		what1[] = "test12start12";
+	const char		src0[] = "123";
+	char			*result;
+	char			*result0;
+	size_t			n = 18;
+
 
 	printf("\n");
-	re_result = strlcat(what1, src1, 8);
-	my_result = ft_strlcat(what2, src2, 8);
-	printf("--------------------\n");
-	printf("re num : %zu\n", re_result);
-	printf("my num : %zu\n", my_result);
-	printf("--------------------\n");
-	printf("re is:");
+	result0 = ft_strtrim(what0, src0);
+	printf("  | %s \t@ %p \n- | %s \t\t\t@ %p\n", what0, what0, src0, src0);
+	printf("  ----------------------------\n");
+	printf("= | %s \t\t@ %p\n", result0, result0);
 	for(int i= 0; i < n; i++)
-		printf("[%c]\t", what1[i]);
+		printf("[%c]\t", result0[i]);
 	printf("\n");
-	printf("re is:");
 	for(int i= 0; i < n; i++)
-		printf("[%d]\t", what1[i]);
+		printf("[%d]\t", result0[i]);
 	printf("\n");
-	printf("\n");
-	printf("my is: ");
-	for(int i= 0; i< n; i++)
-		printf("[%c]\t", what2[i]);
-	printf("\n");
-	printf("my is: ");
-	for(int i= 0; i < n; i++)
-		printf("[%d]\t", what2[i]);
-	printf("\n");
-	printf("re : %s\n", what1);
-	printf("my : %s\n", what2);
 	printf("\n");
 
+	result = ft_strtrim(av[1], av[2]);
+	printf("  | %s \t@ %p \n- | %s \t@ %p\n", av[1], av[1], av[2], av[2]);
+	printf("  ----------------------------\n");
+	printf("= | %s \t@ %p\n", result, result);
+	for(int i= 0; i < n; i++)
+		printf("[%c]\t", result[i]);
+	printf("\n");
+	for(int i= 0; i < n; i++)
+		printf("[%d]\t", result[i]);
+	free(result);
+	free(result0);
 	return (0);
-}
-
-size_t	strlcat_origin(char *dst, const char *src, size_t siz)
-{
-	register char *d = dst;
-	register const char *s = src;
-	register size_t n = siz;
-	size_t dlen;
-
-	/* Find the end of dst and adjust bytes left but don't go past end */
-	while (n-- != 0 && *d != '\0')
-		d++;
-	dlen = d - dst;
-	n = siz - dlen; //size_t 범위 넘어버림
-
-	if (n == 0)
-		return(dlen + strlen(s));
-	while (*s != '\0') {
-		if (n != 1) {
-			*d++ = *s;
-			n--;
-		}
-		s++;
-	}
-	*d = '\0';
-
-	return(dlen + (s - src));	/* count does not include NUL */
 }

@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim_finish.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 00:12:31 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/03 03:53:01 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/03 16:42:14 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	count_make(char *dst, char *str, char *src, unsigned long *j);
+static size_t	count_make(char *dst, const char *str,
+		const char *src, unsigned long *j);
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
@@ -27,12 +28,12 @@ char	*ft_strtrim(char const *s1, char const *set)
 	i = 0;
 	if (s1 && set)
 	{
-		set_cnt = count_make(ptr, (char *)s1, (char *)set, &i);
+		set_cnt = count_make(ptr, s1, set, &i);
 		final_len = s1_len - set_cnt * ft_strlen(set);
 		ptr = malloc(sizeof(char) * final_len + 1);
 		if (ptr)
 		{
-			count_make(ptr, (char *)s1, (char *)set, &i);
+			count_make(ptr, s1, set, &i);
 			ptr[i] = '\0';
 			if (final_len == i)
 				return (ptr);
@@ -41,7 +42,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	return (NULL);
 }
 
-static size_t	count_make(char *dst, char *str, char *src, unsigned long *j)
+static size_t	count_make(char *dst, const char *str,
+		const char *src, unsigned long *j)
 {
 	char	*pos;
 	size_t	bf_i;

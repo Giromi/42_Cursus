@@ -6,64 +6,61 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 00:12:31 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/03 03:53:01 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/12 15:06:16 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	count_make(char *dst, char *str, char *src, unsigned long *j);
+static size_t	check_size(char const *s, char const *set, size_t *i);
+static size_t	cmp_set(char const *str, char const *set, size_t set_size);
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char			*ptr;
-	size_t			set_cnt;
-	size_t			s1_len;
-	size_t			final_len;
-	unsigned long	i;
+	char	*dst;
+	size_t	size;
+	size_t	i;
+	size_t	idx;
 
-	ptr = NULL;
-	s1_len = ft_strlen(s1);
 	i = 0;
-	if (s1 && set)
-	{
-		set_cnt = count_make(ptr, (char *)s1, (char *)set, &i);
-		final_len = s1_len - set_cnt * ft_strlen(set);
-		ptr = malloc(sizeof(char) * final_len + 1);
-		if (ptr)
-		{
-			count_make(ptr, (char *)s1, (char *)set, &i);
-			ptr[i] = '\0';
-			if (final_len == i)
-				return (ptr);
-		}
-	}
-	return (NULL);
+	if (!s1 || !set)
+		return (NULL);
+	idx = 0;
+	size = check_size(s1, set, &idx) + 1;
+	dst = malloc(sizeof(char) * size);
+	if (!dst)
+		return (NULL);
+	dst[size] = '\0';
+	while (s1[idx] && size-- - 1)
+		dst[i++] = s1[idx++];
+	return (dst);
 }
 
-static size_t	count_make(char *dst, char *str, char *src, unsigned long *j)
+static size_t	check_size(char const *s, char const *set, size_t *idx)
 {
-	char	*pos;
-	size_t	bf_i;
-	size_t	i;
-	size_t	cnt;
+	size_t	s_idx;
+	size_t	e_idx;
+	size_t	len;
+	size_t	set_len;
 
-	bf_i = 0;
-	cnt = 0;
+	s_idx = 0;
+	e_idx = ft_strlen(s) - 1;
+	set_len = ft_strlen(set);
+	while (s[e_idx] && cmp_set(&s[e_idx], set, set_len) < set_len)
+		e_idx--;
+	while (s[s_idx] && cmp_set(&s[s_idx], set, set_len) < set_len)
+		s_idx++;
+	len = e_idx - s_idx + 1;
+	*idx = s_idx;
+	return (len);
+}
+
+static size_t	cmp_set(char const *str, char const *set, size_t set_len)
+{
+	size_t	i;
+
 	i = 0;
-	while (str[i++])
-	{
-		pos = ft_strnstr(&str[i - 1], src, ft_strlen(str) - i + 1);
-		if (pos)
-		{
-			i = pos - str;
-			if (dst)
-				while (bf_i < i)
-					dst[(*j)++] = str[bf_i++];
-			i += ft_strlen(src);
-			cnt++;
-		}
-		bf_i = i;
-	}
-	return (cnt);
+	while (*str != set[i] && set_len--)
+		i++;
+	return (i);
 }

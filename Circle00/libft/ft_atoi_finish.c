@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 12:27:51 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/23 05:18:01 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/12 20:22:14 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ int	ft_atoi(const char *str)
 		c = str[i] - '0';
 		if (num > (long)(over_value / 10) || (num == (long)(over_value / 10)
 					&& c > (int)(over_value % 10)))
-		{
 			return (sign * (int)over_value);
-		}
 		num = num * 10 + c;
 		i++;
 	}

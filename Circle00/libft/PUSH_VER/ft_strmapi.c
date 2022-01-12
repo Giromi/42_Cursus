@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/20 10:00:42 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/12 12:02:12 by minsuki2         ###   ########.fr       */
+/*   Created: 2022/01/12 15:11:48 by minsuki2          #+#    #+#             */
+/*   Updated: 2022/01/12 19:44:48 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-//#include "../libft/libft.h"
-#include <string.h>
 
-int main(int ac, char *av[])
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	printf("re : %d\n", atoi(av[1]));
-	printf("my : %d\n", ft_atoi(av[1]));
-	/** printf("%zu\n", LONG_MIN); */
-	return (0);
+	size_t	len;
+	char	*str;
+
+	if (!s || !f)
+		return (NULL);
+	len = ft_strlen(s);
+	str = malloc(sizeof(char) * len + 1);
+	if (!str)
+		return (NULL);
+	str[len] = '\0';
+	while (len--)
+		str[len] = f(len, s[len]);
+	return (str);
 }
-//LONG_MIN : -9223372036854775808
-//LONG_MAX :  9223372036854775807
-//LONG_MAX : 1922337203685477580
-//27670116110564327422 : -2 (wrong)
-// 9223372036854775807
-//27670116110564327423 : -1
-//27670116110564327424 : -1 (over)

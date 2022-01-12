@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/20 10:00:42 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/12 12:02:12 by minsuki2         ###   ########.fr       */
+/*   Created: 2022/01/12 20:16:50 by minsuki2          #+#    #+#             */
+/*   Updated: 2022/01/12 20:55:36 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-//#include "../libft/libft.h"
-#include <string.h>
 
-int main(int ac, char *av[])
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	printf("re : %d\n", atoi(av[1]));
-	printf("my : %d\n", ft_atoi(av[1]));
-	/** printf("%zu\n", LONG_MIN); */
-	return (0);
+	size_t	len;
+
+	if (!s || !f)
+		return ;
+	len = ft_strlen(s);
+	while (len--)
+		f(len, &s[len]);
 }
-//LONG_MIN : -9223372036854775808
-//LONG_MAX :  9223372036854775807
-//LONG_MAX : 1922337203685477580
-//27670116110564327422 : -2 (wrong)
-// 9223372036854775807
-//27670116110564327423 : -1
-//27670116110564327424 : -1 (over)

@@ -45,39 +45,4 @@ int main()
 
 */
 
-#include <stdio.h>
-int sum(int, int);
-
-int main(void)
-{
-	int a = 10;
-	int b = 20;
-	int (*f)(int, int);
-	int *p;
-	f = sum;
-
-	p = &a;
-	printf("*f   : %p\n", *f);
-	printf(" f   : %p\n", f);
-	printf("&f   : %p\n", &f);
-	printf("*sum : %p\n", *sum);
-	printf(" sum : %p\n", sum);
-	printf("&sum : %p\n", &sum);
-
-	
-	printf("&a   : %p\n", &a);
-	printf(" a   : %p\n", a);
-	printf(" p   : %p\n", p);
-	printf("*p   : %p\n", *p);
-
-	int c = 32;
-	int *d = &c;
-	printf("%p\n", d);
-	printf("%p\n", &d);
-}
-
-int sum(int a, int b)
-{
-	return a + b;
-}
 

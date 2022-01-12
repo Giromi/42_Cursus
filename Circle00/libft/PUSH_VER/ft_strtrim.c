@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim_finish.c                                :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 00:12:31 by minsuki2          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/01/03 16:42:14 by minsuki2         ###   ########.fr       */
-=======
 /*   Updated: 2022/01/12 15:06:16 by minsuki2         ###   ########.fr       */
->>>>>>> 492f77b637adbfad1d4d55f372a11851ede17e1b
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-<<<<<<< HEAD
-static size_t	count_make(char *dst, const char *str,
-		const char *src, unsigned long *j);
-=======
 static size_t	check_size(char const *s, char const *set, size_t *i);
 static size_t	cmp_set(char const *str, char const *set, size_t set_size);
->>>>>>> 492f77b637adbfad1d4d55f372a11851ede17e1b
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
@@ -32,26 +23,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	idx;
 
 	i = 0;
-<<<<<<< HEAD
-	if (s1 && set)
-	{
-		set_cnt = count_make(ptr, s1, set, &i);
-		final_len = s1_len - set_cnt * ft_strlen(set);
-		ptr = malloc(sizeof(char) * final_len + 1);
-		if (ptr)
-		{
-			count_make(ptr, s1, set, &i);
-			ptr[i] = '\0';
-			if (final_len == i)
-				return (ptr);
-		}
-	}
-	return (NULL);
-}
-
-static size_t	count_make(char *dst, const char *str,
-		const char *src, unsigned long *j)
-=======
 	if (!s1 || !set)
 		return (NULL);
 	idx = 0;
@@ -85,7 +56,6 @@ static size_t	check_size(char const *s, char const *set, size_t *idx)
 }
 
 static size_t	cmp_set(char const *str, char const *set, size_t set_len)
->>>>>>> 492f77b637adbfad1d4d55f372a11851ede17e1b
 {
 	size_t	i;
 

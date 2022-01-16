@@ -6,7 +6,7 @@
 #    By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-#    Updated: 2022/01/12 22:44:22 by minsuki2         ###   ########.fr        #
+#    Updated: 2022/01/16 19:59:53 by minsuki2         ###   ########.fr        #
 #    Updated: 2022/01/12 20:16:13 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -70,7 +70,7 @@ BONUS_SRCS_FILES = ft_lstnew.c			\
 			 	   ft_lstlast.c			\
 			 	   ft_lstsize.c			\
 			 	   ft_lstadd_front.c	\
-			 	   ft_lstadd_back.c		#\
+			 	   ft_lstadd_back.c		\
 			 	   ft_lstdelone.c		\
 			 	   ft_lstclear.c		\
 			 	   ft_lstmap.c
@@ -102,7 +102,7 @@ $(TARGET): $(NAME) $(MAIN) $(INCLUDES)
 	@echo $@ Making...
 	$(CC) -g $(MAIN) -I../libft/ -L./ -lft
 
-%.out: %.c $(MAIN) $(INCLUDES)
+%.out: %.c bonus $(NAME) $(MAIN) $(INCLUDES)
 	$(CC) -g $(MAIN) -I../libft $< -L./ -lft
 
 

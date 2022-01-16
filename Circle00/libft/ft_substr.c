@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_substr_finish.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 17:29:10 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/16 18:23:55 by minsuki2         ###   ########.fr       */
+/*   Created: 2022/01/01 18:22:33 by minsuki2          #+#    #+#             */
+/*   Updated: 2022/01/01 20:36:08 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void    ft_lstadd_front(t_list **lst, t_list *new)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	if (lst && new)
-	{
-		new->next = *lst;
-		*lst = new;
-	}
+	char	*ptr;
+	ptr = ft_calloc(len, sizeof(char));
+	if (!(ptr))
+		return (NULL);
+	ft_strlcpy(ptr, s + start,  len + 1);
+	return (ptr);
 }

@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_memchr_1st_finish.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 17:29:10 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/16 18:23:55 by minsuki2         ###   ########.fr       */
+/*   Created: 2021/12/15 12:36:46 by minsuki2          #+#    #+#             */
+/*   Updated: 2021/12/30 19:01:16 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void    ft_lstadd_front(t_list **lst, t_list *new)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	if (lst && new)
+	size_t	i;
+
+	i = 0;
+	while (i < n)
 	{
-		new->next = *lst;
-		*lst = new;
+		if (((unsigned char *)s)[i] == c)
+			return (&((unsigned char *)s)[i]);
+		i++;
 	}
+	return (NULL);
 }

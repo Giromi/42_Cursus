@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_finish.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 00:11:55 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/05 01:31:37 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/17 17:24:11 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,22 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	j = 0;
 	ea = count_words(s, c);
-	if (ea > 0)
+	if (ea <= 0)
+		return (NULL);
+	ptr = malloc(sizeof(char *) * (ea + 1));
+	if (!ptr)
 	{
-		if (*s != c)
-			ea++;
-		ptr = malloc(sizeof(char *) * (ea + 1));
-		if (ptr)
-		{
-			while (i++ < ea)
-			{
-				while (s[j] == c)
-					j++;
-				ptr[i - 1] = make_ptr(s, &j, c);
-			}
-			ptr[ea] = NULL;
-			return (ptr);
-		}
 		ft_error_malloc(ptr, ea + 1);
+		return (NULL);
 	}
-	return (NULL);
+	while (i++ < ea)
+	{
+		while (s[j] == c)
+			j++;
+		ptr[i - 1] = make_ptr(s, &j, c);
+	}
+	ptr[ea] = NULL;
+	return (ptr);
 }
 
 static size_t	count_words(char const *str, char c)
@@ -65,6 +62,8 @@ static size_t	count_words(char const *str, char c)
 				cnt++;
 		}
 	}
+	if (*str != c)
+		cnt++;
 	return (cnt);
 }
 
@@ -84,18 +83,10 @@ static char	*make_ptr(char const *s, size_t *k, char c)
 static char	**ft_error_malloc(char **str, size_t D2_size)
 {
 	size_t	idx;
+
 	idx = 0;
 	while (idx + 1 < D2_size)
 		free(str[idx++]);
 	free(str);
 	return (NULL);
 }
-    //
-	// idx = 0;
-	// if (str)
-	// {
-	//     while (str[idx])
-	//         idx++;
-	//     if (idx == D2_size)
-	//         return (str);
-	// }

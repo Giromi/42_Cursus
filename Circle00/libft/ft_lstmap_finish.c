@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap_finish.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:56:32 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/16 20:06:16 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/17 23:03:23 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list  *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*new;
 	t_list	*start;
 
-	if (!lst || !f || !del)
+	if (!lst || !f)
 		return (NULL);
 	start = NULL;
 	while (lst)
@@ -31,6 +31,5 @@ t_list  *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		ft_lstadd_back(&start, new);
 		lst = lst->next;
 	}
-	// new = NULL;
 	return (start);
 }

@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 13:43:32 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/02 02:58:57 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/17 17:48:26 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	src_len = ft_strlen(src);
 	n = dstsize - dst_len;
 	offset_len = 0;
-	if (n >= 1)
-		while (src[offset_len++] && n-- -1)
-			dst[dst_len - 1 + offset_len] = src[offset_len - 1];
-	else
+	if (n < 1)
 		dst_len = dstsize;
+	else
+		while (src[offset_len++] && n-- - 1)
+			dst[dst_len - 1 + offset_len] = src[offset_len - 1];
 	dst[dst_len - 1 + offset_len] = '\0';
 	return (dst_len + src_len);
 }
-

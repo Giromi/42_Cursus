@@ -5,11 +5,16 @@ void	*f_f(void *);
 
 int	main(void)
 {
-	t_list	*lst1 = ft_lstnew("lst1");
-	t_list	*lst2 = ft_lstnew("lst2");
-	t_list	*lst3 = ft_lstnew("lst3");
-	t_list	*lst4 = ft_lstnew("lst4");
-	t_list	*lst5 = ft_lstnew("lst5");
+	char	*str1 = ft_strdup("lst1");
+	char	*str2 = ft_strdup("lst2");
+	char	*str3 = ft_strdup("lst3");
+	char	*str4 = ft_strdup("lst4");
+	char	*str5 = ft_strdup("lst5");
+	t_list	*lst1 = ft_lstnew(str1);
+	t_list	*lst2 = ft_lstnew(str2);
+	t_list	*lst3 = ft_lstnew(str3);
+	t_list	*lst4 = ft_lstnew(str4);
+	t_list	*lst5 = ft_lstnew(str5);
 	t_list	*lst;
 	t_list	*tst;
 	t_list	*tst1;
@@ -42,13 +47,13 @@ int	main(void)
 
 void	f_del(void *content)
 {
-	content = NULL;
-	// printf("f_del\n");
+	free(content);
 }
 
 void	*f_f(void *content)
 {
-	content = ft_strtrim(content, "ls");
-	// printf("f_f\n");
-	return (content);
+	char	*str;
+
+	str = ft_strdup(content);
+	return (ft_strtrim(str, "ls"));
 }

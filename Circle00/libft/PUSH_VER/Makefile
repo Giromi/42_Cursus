@@ -6,7 +6,7 @@
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-#    Updated: 2021/12/30 15:47:13 by minsuki2         ###   ########.fr        #
+#    Updated: 2022/01/17 16:21:12 by minsuki2         ###   ########.fr        #
 #    Updated: 2021/12/20 16:45:46 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -64,6 +64,7 @@ BONUS_SRCS_FILES = ft_lstnew.c			\
 			 	   ft_lstadd_back.c		\
 			 	   ft_lstdelone.c		\
 			 	   ft_lstclear.c		\
+				   ft_lstiter.c			\
 			 	   ft_lstmap.c
 
 
@@ -71,13 +72,11 @@ SRCS ?= $(SRCS_FILES)
 OBJS = $(SRCS:.c=.o)
 
 #-------------------------------
-PUSH = $(wildcard ft_*_finish_norm.c)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo $@ Making...
-	@echo $^
 	$(AR) $(ARFLAGS) $@ $^
 
 %.o: %.c $(CURRENT_DIR)$(INCLUDES)
@@ -93,6 +92,6 @@ fclean: clean
 re: fclean all
 
 bonus:
-	@$(MAKE) "SCRS = $(SRCS_FILES) $(BONUS_SRCS_FILES)" all
+	@$(MAKE) "SRCS = $(SRCS_FILES) $(BONUS_SRCS_FILES)" all
 
-.PHONY: all clean fclean re bonus exe
+.PHONY: all clean fclean re bonus

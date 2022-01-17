@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_memmove_finish.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 00:42:02 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/10 22:39:36 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/17 16:48:37 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,10 @@ void    *ft_memmove(void *dst, const void *src, size_t len)
 {
 	size_t	i;
 
+	i = 0;
 	if (dst < src)
-	{
-		i = 0;
-		while (i < len)
-		{
-			((unsigned char*)dst)[i] = ((unsigned char*)src)[i];
-		i++;
-		}
-	}
+		while (i++ < len)
+			((unsigned char *)dst)[i - 1] = ((unsigned char *)src)[i - 1];
 	else
 		ft_memcpy(dst, src, len);
 	return (dst);

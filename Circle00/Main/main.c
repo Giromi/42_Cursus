@@ -1,54 +1,33 @@
 #include "libft.h"
+#include <string.h>
 
-void	f_del(void *);
-void	*f_f(void *);
-
-int	main(void)
+int main(int ac, char *av[])
 {
-	t_list	*lst1 = ft_lstnew("lst1");
-	t_list	*lst2 = ft_lstnew("lst2");
-	t_list	*lst3 = ft_lstnew("lst3");
-	t_list	*lst4 = ft_lstnew("lst4");
-	t_list	*lst5 = ft_lstnew("lst5");
-	t_list	*lst;
-	t_list	*tst;
-	t_list	*tst1;
+	char	str1[] = "Hello World";
+	char	str2[] = "World";
+	char	str3[] = "Hello World";
+	char	str4[] = "World";
+	char	*re_ptr;
+	char	*my_ptr;
+	int		len1 = 10;
+	int		len2 = 10;
 
-	lst1->next = lst2;
-	lst2->next = lst3;
-	lst3->next = lst4;
-	lst4->next = lst5;
-	lst5->next = NULL;
-	lst = lst1;
-	// printf("%s / %p @ %p\n", (char *)lst1->content, lst1->next, lst1);
-	// printf("%s / %p @ %p\n", (char *)lst2->content, lst2->next, lst2);
-	// printf("%s / %p @ %p\n", (char *)lst3->content, lst3->next, lst3);
-	while (lst)
-	{
-		printf("%s / %p @ %p\n", (char *)lst->content, lst->next, lst);
-		lst = lst->next;
-	}
-	tst1 = ft_lstmap(lst1, f_f, f_del);
-	tst = tst1;
-	while (tst)
-	{
-		printf("%s / %p @ %p\n", (char *)tst->content, tst->next, tst);
-		tst = tst->next;
-	}
-	ft_lstclear(&lst1, f_del);
-	ft_lstclear(&tst1, f_del);
+	re_ptr = strnstr(str1, str2, len1);
+	printf("or : %p\n", str1);
+	printf("re : %p\n", re_ptr);
+	printf("or - re = %ld\n", re_ptr - str1);
 
-}
+	my_ptr = ft_strnstr(str3, str4, len2);
+	printf("or : %p\n", str3);
+	printf("my : %p\n", my_ptr);
+	printf("or - my = %ld\n", my_ptr - str3);
 
-void	f_del(void *content)
-{
-	content = NULL;
-	// printf("f_del\n");
-}
 
-void	*f_f(void *content)
-{
-	content = ft_strtrim(content, "ls");
-	// printf("f_f\n");
-	return (content);
+	/* av 사용
+	 * printf("or : %p\n", av[1]);
+	 * printf("av : %p\n", ft_strnstr(av[1], av[2], ft_atoi(av[3])));
+	 */
+
+
+	return (0);
 }

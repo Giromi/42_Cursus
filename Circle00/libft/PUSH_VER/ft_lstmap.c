@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:56:32 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/17 23:02:47 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/17 23:03:23 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		}
 		ft_lstadd_back(&start, new);
 		lst = lst->next;
-		new = new->next;
 	}
 	return (start);
 }

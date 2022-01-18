@@ -6,7 +6,7 @@
 #    By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-#    Updated: 2022/01/17 22:51:13 by minsuki2         ###   ########.fr        #
+#    Updated: 2022/01/18 10:52:30 by minsuki2         ###   ########.fr        #
 #    Updated: 2022/01/12 20:16:13 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -21,69 +21,68 @@ INCLUDES = ./libft.h
 MAIN = ../Main/main.c
 INC = -I./
 
-#Delete-----------------------------------
 TARGET = a.out
 PUSH_DIR = PUSH_VER/
 
 #-------------------------------
 
 #-------------------------------Part1
-SRCS_FILES = ft_isalpha_finish.c	\
-			 ft_isdigit_finish.c	\
-			 ft_isalnum_finish.c	\
-			 ft_isascii_finish.c	\
-			 ft_isprint_finish.c	\
-			 ft_strlen_finish.c		\
-			 ft_memset_finish.c		\
-			 ft_bzero_finish.c		\
-			 ft_memcpy_finish.c		\
-			 ft_memmove_finish.c	\
-			 ft_toupper_finish.c	\
-			 ft_tolower_finish.c	\
-			 ft_strchr_finish.c		\
-			 ft_strrchr_finish.c	\
-			 ft_memchr_finish.c		\
-			 ft_strlcpy_finish.c	\
-			 ft_strlcat_finish.c	\
-			 ft_strncmp_finish.c	\
-			 ft_memcmp_finish.c		\
-			 ft_atoi_finish.c		\
-			 ft_strnstr_finish.c	\
-			 ft_calloc_finish.c		\
-			 ft_strdup_finish.c
+SRCS_FILES = ft_isalpha.c		\
+			 ft_isdigit.c		\
+			 ft_isalnum.c		\
+			 ft_isascii.c		\
+			 ft_isprint.c		\
+			 ft_strlen.c		\
+			 ft_memset.c		\
+			 ft_bzero.c			\
+			 ft_memcpy.c		\
+			 ft_memmove.c		\
+			 ft_toupper.c		\
+			 ft_tolower.c		\
+			 ft_strchr.c		\
+			 ft_strrchr.c		\
+			 ft_memchr.c		\
+			 ft_strlcpy.c		\
+			 ft_strlcat.c		\
+			 ft_strncmp.c		\
+			 ft_memcmp.c		\
+			 ft_atoi.c			\
+			 ft_strnstr.c		\
+			 ft_calloc.c		\
+			 ft_strdup.c
 
 #-------------------------------Part2
-SRCS_FILES += ft_putchar_fd_finish.c	\
-			  ft_putstr_fd_finish.c		\
-			  ft_putnbr_fd_finish.c		\
-			  ft_putendl_fd_finish.c	\
-			  ft_substr_finish.c		\
-			  ft_strjoin_finish.c		\
-			  ft_strtrim_finish.c		\
-			  ft_itoa_finish.c			\
-			  ft_split_finish.c			\
-			  ft_strmapi_finish.c		\
-			  ft_striteri_finish.c
+SRCS_FILES += ft_putchar_fd.c		\
+			  ft_putstr_fd.c		\
+			  ft_putnbr_fd.c		\
+			  ft_putendl_fd.c		\
+			  ft_substr.c			\
+			  ft_strjoin.c		\
+			  ft_strtrim.c		\
+			  ft_itoa.c			\
+			  ft_split.c			\
+			  ft_strmapi.c		\
+			  ft_striteri.c
 
 #-------------------------------Bonus
-BONUS_SRCS_FILES = ft_lstnew_finish.c			\
-			 	   ft_lstlast_finish.c			\
-			 	   ft_lstsize_finish.c			\
-			 	   ft_lstadd_front_finish.c		\
-			 	   ft_lstadd_back_finish.c		\
-			 	   ft_lstdelone_finish.c		\
-			 	   ft_lstclear_finish.c			\
-				   ft_lstiter_finish.c			\
-			 	   ft_lstmap_finish.c
+BONUS_SRCS_FILES = ft_lstnew.c			\
+			 	   ft_lstlast.c			\
+			 	   ft_lstsize.c			\
+			 	   ft_lstadd_front.c		\
+			 	   ft_lstadd_back.c		\
+			 	   ft_lstdelone.c			\
+			 	   ft_lstclear.c			\
+				   ft_lstiter.c			\
+			 	   ft_lstmap.c
 
 
 SRCS ?= $(SRCS_FILES)
 OBJS = $(SRCS:.c=.o)
 
 #-------------------------------
-PUSH = $(wildcard ft_*_finish.c)
-TMP = $(wildcard $(PUSH_DIR)*.c)
-DONE = $(TMP:$(PUSH_DIR)%=%)
+PUSH = $(SRCS) $(BONUS_SRCS_FILES)
+#TMP = $(wildcard $(PUSH_DIR)*.c)
+#DONE = $(TMP:$(PUSH_DIR)%=%) # 파일 경로 삭제
 
 all: $(NAME)
 
@@ -112,8 +111,8 @@ push: $(PUSH)
 	@echo --------------------------------
 	@echo $^ Copying... | sed 's/ /\n/g'
 	@cp $^ $(PUSH_DIR)
-	@rename -f 's/_finish//' $(PUSH_DIR)*
-#@rename -f 's/_[2-9](st|nd|rd|th)_finish//' $(PUSH_DIR)*
+#@rename -f 's///' $(PUSH_DIR)*
+#@rename -f 's/_[2-9](st|nd|rd|th)//' $(PUSH_DIR)*
 #@ls -1 $(PUSH_DIR)
 
 # bring:

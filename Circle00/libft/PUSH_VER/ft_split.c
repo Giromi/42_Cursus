@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_finish.c                                  :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 00:11:55 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/17 17:24:11 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/21 20:23:34 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 static size_t	count_words(char const *str, char c);
-static char		*make_ptr(char const *s, size_t *k, char c);
+static char		*make_ptr(char const *str, size_t *j, char c);
 static char		**ft_error_malloc(char **str, size_t D2_size);
 
 char	**ft_split(char const *s, char c)
@@ -23,22 +23,19 @@ char	**ft_split(char const *s, char c)
 	size_t	i;
 	size_t	j;
 
-	i = 0;
-	j = 0;
-	ea = count_words(s, c);
-	if (ea <= 0)
+	if (!s)
 		return (NULL);
+	ea = count_words(s, c);
 	ptr = malloc(sizeof(char *) * (ea + 1));
 	if (!ptr)
-	{
-		ft_error_malloc(ptr, ea + 1);
 		return (NULL);
-	}
-	while (i++ < ea)
+	i = 0;
+	j = 0;
+	while (i < ea)
 	{
-		while (s[j] == c)
-			j++;
-		ptr[i - 1] = make_ptr(s, &j, c);
+		ptr[i++] = make_ptr((char *)s, &j, c);
+		if (!ptr)
+			return (ft_error_malloc(ptr, ea + 1));
 	}
 	ptr[ea] = NULL;
 	return (ptr);
@@ -52,41 +49,45 @@ static size_t	count_words(char const *str, char c)
 
 	cnt = 0;
 	i = 0;
-	while (str[i++])
+	if (*str && *str != c)
+		cnt++;
+	while (str[i++] && c)
 	{
 		pos = ft_strchr(&str[i - 1], c);
 		if (pos)
 		{
 			i = pos - str + 1;
-			if (!(str[i] == c || str[i] == '\0'))
+			if (str[i] != c && str[i])
 				cnt++;
 		}
 	}
-	if (*str != c)
-		cnt++;
 	return (cnt);
 }
 
-static char	*make_ptr(char const *s, size_t *k, char c)
+static char	*make_ptr(char const *str, size_t *j, char c)
 {
 	size_t	idx;
+	size_t	str_len;
 	char	*dst;
+	char	*pos;
 
-	idx = *k;
-	while (s[(*k)++])
-		if (s[*k - 1] == c)
-			break ;
-	dst = ft_substr(s, idx, (*k - 1) - idx);
+	str_len = ft_strlen(str);
+	while (str[*j] == c)
+		(*j)++;
+	pos = ft_strchr(str + *j, c);
+	idx = pos - str;
+	if (idx > str_len)
+		idx = str_len;
+	dst = ft_substr(str, (unsigned int)*j, idx - *j);
+	*j = idx;
 	return (dst);
 }
 
 static char	**ft_error_malloc(char **str, size_t D2_size)
 {
-	size_t	idx;
-
-	idx = 0;
-	while (idx + 1 < D2_size)
-		free(str[idx++]);
+	while (D2_size--)
+		if (str[D2_size])
+			free(str[D2_size]);
 	free(str);
 	return (NULL);
 }

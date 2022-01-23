@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_finish.c                                :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 20:25:39 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/17 17:47:02 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/21 03:48:37 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	pt = ft_strdup(s1);
 	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	pt = (char *)malloc(sizeof(char) * size);
+	if (!pt)
+		return (NULL);
+	ft_strlcpy(pt, s1, size);
 	ft_strlcat(pt, s2, size);
 	return (pt);
 }

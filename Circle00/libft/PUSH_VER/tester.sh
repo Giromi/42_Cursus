@@ -4,7 +4,7 @@ read $a
 norminette ./*.c ./*.h
 echo -e "\033[32;1m"LIBFT TEST"\033[m"
 read $a
-git clone https://github.com/jtoty/Libftest
+git clone https://github.com/jtoty/Libftest tester1
 cd Libftest/
 ./grademe.sh
 sed -i "" 's/~\/libft/..\//' my_config.sh

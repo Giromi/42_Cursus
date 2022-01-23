@@ -25,9 +25,8 @@ int main(int ac, char *av[])
 		printf("[%d]\t", buf1[i]);
 	printf("\n");
 
-	printf("< putstr_fd >\n");
-	printf("fd : %d\n", fd2);
-	ft_putstr_fd(av[1], fd3); //write on fd_3
+	printf("fd : %d\n", fd3);
+	ft_putstr(av[1], fd3); //write on fd_3
 	read(fd4, buf2, MAX);
 	for (int i = 0; i < MAX ; i++)
 		printf("[%c]\t", buf2[i]);

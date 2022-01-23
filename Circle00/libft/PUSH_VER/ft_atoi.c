@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_finish.c                                   :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 12:27:51 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/12 20:22:14 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/20 13:11:30 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static	int		plma_check(int c, int *sign);
 static	int		ft_isspace(int c);
-static	size_t	make_max(int *ptr);
+static	size_t	make_max(int sign);
 
 int	ft_atoi(const char *str)
 {
@@ -30,27 +30,27 @@ int	ft_atoi(const char *str)
 	while (ft_isspace(str[i]))
 		i++;
 	i += plma_check(str[i], &sign);
-	over_value = make_max(&sign);
+	over_value = make_max(sign);
 	while (ft_isdigit(str[i]) && str[i])
 	{
 		c = str[i] - '0';
 		if (num > (long)(over_value / 10) || (num == (long)(over_value / 10)
 					&& c > (int)(over_value % 10)))
-			return (sign * (int)over_value);
-		num = num * 10 + c;
+			return ((int)over_value);
+		num = num * 10 + (long)c;
 		i++;
 	}
-	return (sign * num);
+	return ((int)(sign * num));
 }
 
-static	size_t	make_max(int *ptr)
+static	size_t	make_max(int sign)
 {
 	size_t	tmp_max;
 
-	if (*ptr == -1)
-		tmp_max = LONG_MIN;
+	if (sign == -1)
+		tmp_max = (size_t)LONG_MIN;
 	else
-		tmp_max = LONG_MAX;
+		tmp_max = (size_t)LONG_MAX;
 	return (tmp_max);
 }
 

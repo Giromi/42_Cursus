@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 09:00:20 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/18 17:37:32 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/20 17:08:04 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	uc1 = (unsigned char *)s1;
 	uc2 = (unsigned char *)s2;
 	i = 0;
-	while (n--)
+	while (i < n)
 	{
 		if (uc1[i] != uc2[i] || !uc1[i] || !uc2[i])
 			return (uc1[i] - uc2[i]);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup_finish.c                                 :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 17:18:13 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/17 17:35:52 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/21 14:08:29 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ char	*ft_strdup(const char *s1)
 	dup = malloc(sizeof(char) * size);
 	if (!dup)
 		return (NULL);
-	dup[size] = '\0';
-	while (size--)
-		dup[size] = s1[size];
+	ft_strlcpy(dup, s1, size);
 	return (dup);
 }

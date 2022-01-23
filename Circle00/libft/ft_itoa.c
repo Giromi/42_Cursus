@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_finish.c                                   :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 04:24:36 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/17 16:27:05 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/21 04:50:01 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ char	*ft_itoa(int n)
 	tmp = n;
 	while (tmp && cnt++)
 		tmp /= 10;
-	if (n >= 0)
+	if (n > 0)
 		cnt--;
-	ptr = malloc(sizeof(char) * (cnt + 1));
+	ptr = (char *)malloc(sizeof(char) * (cnt + 1));
 	if (!ptr)
 		return (NULL);
+	ptr[cnt] = '\0';
 	itoa_nbr(n, ptr, cnt);
-	ptr[cnt + 1] = '\0';
 	return (ptr);
 }
 

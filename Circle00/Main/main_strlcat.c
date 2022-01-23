@@ -1,73 +1,90 @@
+#include <string.h>
 #include "libft.h"
 #include <stdio.h>
-#include <string.h>
 
-size_t	strlcat_origin(char *dst, const char *src, size_t siz);
+void cmp_print(char *dst, char *src, size_t size);
 
 int main(void)
 {
-	char		what1[8] = "12";
-	char		what2[8] = "12";
-	const char	src1[] = "test";
-	const char	src2[] = "test";
-	size_t		re_result;
-	size_t		my_result;
-	size_t		n = 10;
+	char *dst1;
+	char *src1;
+	char dst2[8];
+	char dst3[2];
 
-	printf("\n");
-	re_result = strlcat(what1, src1, 8);
-	my_result = ft_strlcat(what2, src2, 8);
-	printf("--------------------\n");
-	printf("re num : %zu\n", re_result);
-	printf("my num : %zu\n", my_result);
-	printf("--------------------\n");
-	printf("re is:");
-	for(int i= 0; i < n; i++)
-		printf("[%c]\t", what1[i]);
-	printf("\n");
-	printf("re is:");
-	for(int i= 0; i < n; i++)
-		printf("[%d]\t", what1[i]);
-	printf("\n");
-	printf("\n");
-	printf("my is: ");
-	for(int i= 0; i< n; i++)
-		printf("[%c]\t", what2[i]);
-	printf("\n");
-	printf("my is: ");
-	for(int i= 0; i < n; i++)
-		printf("[%d]\t", what2[i]);
-	printf("\n");
-	printf("re : %s\n", what1);
-	printf("my : %s\n", what2);
-	printf("\n");
+	char my_dst2[12];
+	size_t si = 12;
 
+	printf("------strlcpy-----\n");
+	src1 = (void *)malloc(1);
+	dst1 = (void *)malloc(1);
+
+
+	printf("1. ");
+	// cmp_print(NULL, src1, sizeof(char) * 7); // seg. fault
+	// cmp_print(dst1, NULL, sizeof(char) * 7); // seg. fault
+	// cmp_print(NULL, NULL, sizeof(char) * 7);	// seg. fault
+
+	printf("2. ");
+	cmp_print("", "", 0);					// "1" 		(5)
+	// printf("re : %zu ", strlcat(NULL, src1, 0));
+	// printf("re : %zu ", strlcat(dst1, NULL, 0));
+	// printf("re : %zu ", strlcat(NULL, NULL, 0));
+
+	printf("3. ");
+	cmp_print("", "t", sizeof(char) * 3);	// "t"
+	cmp_print("1", "t", sizeof(char) * 3);	// "t"
+	cmp_print("12", "t", sizeof(char) * 3);	// "t"
+	cmp_print("123", "t", sizeof(char) * 3);	// "t"
+	cmp_print("1234", "t", sizeof(char) * 3);	// "t"
+	cmp_print("12345", "t", sizeof(char) * 3);	// "t"
+	cmp_print("123456", "t", sizeof(char) * 3);	// "t"
+
+	printf("4. ");
+	cmp_print("1", "Hello", 0);					// "1" 		(5)
+	cmp_print("1", "Hello", sizeof(char) * 1);	// "1" 		(6)
+	cmp_print("1", "Hello", sizeof(char) * 2);	// "1" 		(6)
+	cmp_print("1", "Hello", sizeof(char) * 3);	// "1H"		(6)
+	cmp_print("1", "Hello", sizeof(char) * 4);	// "1He"	(6)
+	cmp_print("1", "Hello", sizeof(char) * 5);	// "1Hel"	(6)
+	cmp_print("1", "Hello", sizeof(char) * 6);	// "1Hell"	(6)
+	cmp_print("1", "Hello", sizeof(char) * 7);	// "1Hello" (6)
+	cmp_print("1", "Hello", sizeof(char) * 8);	// "1Hello" (6)
+
+	printf("5. ");
+	cmp_print("", "", sizeof(char) * 3);		// ""
+	cmp_print("", "t", sizeof(char) * 3);		// "t"
+	cmp_print("", "te", sizeof(char) * 3);		// "t"
+	cmp_print("", "tes", sizeof(char) * 3);		// "t"
+	cmp_print("", "test", sizeof(char) * 3);	// "t"
+	cmp_print("", "test1", sizeof(char) * 3);	// "t"
+	cmp_print("", "test12", sizeof(char) * 3);	// "t"
+
+	printf("6. ");
+
+	printf("6. ");
+
+	printf("7. ");
+	cmp_print("", "test", sizeof(char) * 3);	// "t"
+	printf("\n");
 	return (0);
 }
-
-size_t	strlcat_origin(char *dst, const char *src, size_t siz)
+void cmp_print(char *dst, char *src, size_t size)
 {
-	register char *d = dst;
-	register const char *s = src;
-	register size_t n = siz;
-	size_t dlen;
+	char	*re_dst = strdup(dst);
+	char	*my_dst = strdup(dst);
 
-	/* Find the end of dst and adjust bytes left but don't go past end */
-	while (n-- != 0 && *d != '\0')
-		d++;
-	dlen = d - dst;
-	n = siz - dlen; //size_t 범위 넘어버림
 
-	if (n == 0)
-		return(dlen + strlen(s));
-	while (*s != '\0') {
-		if (n != 1) {
-			*d++ = *s;
-			n--;
-		}
-		s++;
-	}
-	*d = '\0';
-
-	return(dlen + (s - src));	/* count does not include NUL */
+	printf("[CASE]\n");
+	printf("\"%s\" + \"%s\" < %zu >\n", dst, src, size);
+	printf("re : %zu ", strlcat(re_dst, src, size));
+	printf("-> %s\n", re_dst);
+	printf("my : %zu ", ft_strlcat(my_dst, src, size));
+	printf("-> %s\n", my_dst);
+	for (int i = 0; i < 20; i++)
+	printf("[%c]", *(re_dst + i));
+	printf("\n");
+	for (int i = 0; i < 20; i++)
+	printf("[%c]", *(my_dst + i));
+	printf("\n");
+	printf("---------------------\n");
 }

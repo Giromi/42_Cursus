@@ -1,67 +1,41 @@
-#include <string.h>
 #include "libft.h"
-#include <stdio.h>
 
-void cmp_print(char *dst, char *src, size_t size);
+void	check(char *number, char *s1, char *s2, char *result);
 
-int main(void)
+int main(int ac, char *av[])
 {
-	char dst1[12] = "1";
-	char dst2[8];
+	size_t	n = 10;
+	char *str0 = "where is my ";
+	char *str1 = "malloc ???";
+	void *ptr0;
+	void *ptr1;
 
-	char src1[] = "Hello_World";
-	char src2[] = "12345";
-	char my_dst2[12];
-	size_t si = 12;
+	ptr0 = (void *)0;
+	ptr1 = (void *)0;
 
-	printf("------strlcpy-----\n");
-
-	cmp_print(dst1, src1, sizeof(char) * 7); // "Hello_"
-
-	// cmp_print(NULL, src1, sizeof(char) * 7); // seg. fault
-
-	// cmp_print(dst1, NULL, sizeof(char) * 7); // seg. fault
-	// cmp_print(NULL, NULL, sizeof(char) * 7);	// seg. fault
-	cmp_print(dst1, src1, 0);	// seg. fault
-	printf("\n");
+	check("1", "123", "345", "123345");
+	check("2", "", "", "123345");
+	check("3-1", NULL, NULL, "(null)");
+	check("3-2", NULL, "", "(null)");
+	check("3-3", "", NULL, "(null)");
+	check("4", str1, str0, "(null)");
+	check("5", ptr1, "", "");
 	return (0);
 }
-void cmp_print(char *dst, char *src, size_t size)
+
+void	check(char *number, char *s1, char *s2, char *result)
 {
-	char	*re_dst = strdup(dst);
-	char	*my_dst = strdup(dst);
+	char	*p;
 
+	printf("\n[CASE %s]\n", number);
+	printf("\"%s\" + \"%s\"\n", s1, s2);
+	p = ft_strjoin(s1, s2);
+	printf("re : \"%s\"\n", result);
+	printf("my : \"%s\" \t@ %p\n", p, p);
+	if (p == ((void *)0))
+		printf("good");
+	else
+		printf("no");
+	free(p);
 
-	printf("[CASE]\n");
-	printf("re : %zu ", strlcpy(re_dst, src, size));
-	printf("=> %s\n", re_dst);
-	printf("my : %zu ", ft_strlcpy(my_dst, src, size));
-	printf("=> %s\n", my_dst);
-	printf("----------------\n");
 }
-
-// void for_print(
-// {
-// printf("< before >\n");
-// for (int i = 0; i < si; i++)
-// printf("[%c]", *(re_dst2 + i));
-// printf("\n");
-// for (int i = 0; i < si; i++)
-// printf("[%c]", *(my_dst2 + i));
-// printf("\n");
-// printf("real : %zu\n", strlcpy(re_dst2, src2, sizeof(char) * 0));
-// printf(" my  : %zu\n", ft_strlcpy(my_dst2, src2, sizeof(char) * 0));
-// printf("< after >\n");
-// for (int i = 0; i < si; i++)
-// printf("[%c]", *(re_dst2 + i));
-// printf("\n");
-// for (int i = 0; i < si; i++)
-// printf("[%d]", *(re_dst2 + i));
-// printf("\n");
-// printf("\n");
-// for (int i = 0; i < si; i++)
-// printf("[%c]", *(my_dst2 + i));
-// printf("\n");
-// for (int i = 0; i < si; i++)
-//     printf("[%d]", *(my_dst2 + i));
-// }

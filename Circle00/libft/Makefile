@@ -6,7 +6,7 @@
 #    By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-#    Updated: 2022/01/18 10:52:30 by minsuki2         ###   ########.fr        #
+#    Updated: 2022/01/21 03:44:18 by minsuki2         ###   ########.fr        #
 #    Updated: 2022/01/12 20:16:13 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -79,10 +79,14 @@ BONUS_SRCS_FILES = ft_lstnew.c			\
 SRCS ?= $(SRCS_FILES)
 OBJS = $(SRCS:.c=.o)
 
+# FILENAME = $(SRCS:ft_%=%) # 파일 경로 삭제
+# MAIN_FILE = $(addprefix main_, $(FILENAME))
 #-------------------------------
 PUSH = $(SRCS) $(BONUS_SRCS_FILES)
 #TMP = $(wildcard $(PUSH_DIR)*.c)
-#DONE = $(TMP:$(PUSH_DIR)%=%) # 파일 경로 삭제
+# DONE = $(TMP:$(PUSH_DIR)%=%) # 파일 경로 삭제
+# SRCS = $(, $(addsuffix .c, $(FILES)))
+#
 
 all: $(NAME)
 
@@ -103,8 +107,10 @@ $(TARGET): $(NAME) $(MAIN) $(INCLUDES)
 	$(CC) -g $(MAIN) -I../libft/ -L./ -lft
 
 %.out: %.c bonus $(NAME) $(MAIN) $(INCLUDES)
-	$(CC) -g $(MAIN) -I../libft $< -L./ -lft
+	$(CC) -g $(addprefix $(MAIN:%.c=%)_, $(<:ft_%=%)) -I../libft $< -L./ -lft
 
+# main:
+#     @echo $(addsuffix
 
 # push---------------------------------------------
 push: $(PUSH)
@@ -114,6 +120,7 @@ push: $(PUSH)
 #@rename -f 's///' $(PUSH_DIR)*
 #@rename -f 's/_[2-9](st|nd|rd|th)//' $(PUSH_DIR)*
 #@ls -1 $(PUSH_DIR)
+
 
 # bring:
 #     cp $(PUSH_DIR)*.c .

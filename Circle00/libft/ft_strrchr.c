@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr_finish.c                                :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 21:49:27 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/30 18:29:55 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/21 21:22:37 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	size_t	len;
+	size_t	size;
 
-	len = ft_strlen(s) + 1;
-	while (len--)
-		if (s[len] == c)
-			return (&((char *)s)[len]);
-	return (0);
+	size = ft_strlen(s) + 1;
+	while (size--)
+		if (s[size] == (char)c)
+			return ((char *)s + size);
+	return (NULL);
 }

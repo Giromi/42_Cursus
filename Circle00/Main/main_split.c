@@ -2,12 +2,12 @@
 
 size_t	ft_words_cnt(char const *str, char c);
 char	**ft_free_malloc(char **str);
+void	check(char *ca, char *s, char c, size_t cnt);
 
 int main(int ac, char *av[])
 {
 
 	char	*what;
-	size_t	n = ft_atoi(av[3]);;
 	char	what0[] = "te he ks";
 	size_t	n0 = 4;
 	char	what1[] = " Hello World this is party  time ";
@@ -15,65 +15,54 @@ int main(int ac, char *av[])
 	char	what2[] = "  te            he ks";
 	size_t	n2 = 4;
 	char	what3[] = "tlkjeslkfjse,ksjflkjsekf,sdlfkj  k fsd,f sdfksj dfs,d kd";
-	size_t	n3 = 6;
-	char	**result;
-	char	**result0;
-	char	**result1;
-	char	**result2;
-	char	**result3;
-	char	c = *(av[2]);
+	printf("\n");
+	char	what4[] = "\0aa\0bbb";
 
-	what = av[1];
-	printf("\n");
-	result0 = ft_split(what0, ' ');
-	result1 = ft_split(what1, ' ');
-	result2 = ft_split(what2, ' ');
-	result3 = ft_split(what3, ',');
-	result = ft_split(av[1], av[2][0]);
 
-	printf(" origin | %s \n", what1);
-	printf(" split  | ");
-	for(int i = 0; i < n0; i++)
-		printf("%s /", result0[i]);
-	printf("\n");
+	// result3 = ft_split(what3, ',');
 
-	printf("\n");
-	printf(" origin | %s \n", what1);
-	printf(" split  | ");
-	for(int i = 0; i < n1; i++)
-		printf("%s / ", result1[i]);
-	printf("\n");
+	// NULL check
+	// check("1-1", NULL, ' ', "NULL", 1);
+	check("1-2", "", ' ', 1);
+	check("1-3", "", 'z', 1);
+	check("1-3", "hihi", 0, 2);
+	// check("1-3", "   ", ' ', "", 1);
 
-	printf("\n");
-	
-	printf(" origin | %s \n", what2);
-	printf(" split  | ");
-	for(int i= 0; i < n2; i++)
-		printf("%s / ", result2[i]);
-	printf("\n");
-	printf("\n");
+	// Basic check
+	// check("2-1", what1, ' ', 7); // $."Hello" / "World" / "this" / "is" / "party" / "time" /
+	// check("2-2", "  test  fsd  ", ' ', 3);
+	// check("2-3", "  test  ", ' ', 2);
 
-	printf("\n");
-	printf(" origin | %s \n", what3);
-	printf(" split  | ");
-	for(int i= 0; i < n3; i++)
-		printf("%s / ", result3[i]);
-	printf("\n");
-	printf("\n");
+	// Tester check
+	// check("T-1", what4, '\0', 1); 					// $. (null)
+	// check("T-2", "                  olol", ' ', 2);	// $. "olol" / (null)
 
-	printf("\n");
-	printf(" origin | %s \n", what);
-	printf(" split  | ");
-	for(int i= 0; i < n; i++)
-		printf("%s / ", result[i]);
-	printf("\n");
-	printf("\n");
-	ft_free_malloc(result0);
-	ft_free_malloc(result1);
-	ft_free_malloc(result2);
-	ft_free_malloc(result3);
-	ft_free_malloc(result);
+	// check("3-1", "H dfkjsldfk jsd lkfj", ' ', "te", 1);
+	// check("3-2", "H ", ' ', "tes", 1);
+
 	return (0);
+}
+
+void	check(char *ca, char *s, char c, size_t cnt)
+{
+	char **p = ft_split(s, c);
+
+	printf("\n[CASE %s]\n", ca);
+	printf("\"%s\" - \'%c\' \n", s, c);
+	printf(" split  | ");
+	for (int i = 0; i < cnt; i++)
+	{
+		if (!*(p + i))
+			printf("%s / ", *(p + i));
+		else
+			printf("\"%s\" / ", *(p + i));
+	}
+	printf("\n");
+	for (int i = 0; i < cnt; i++)
+			printf("%p / ", *(p + i));
+	printf("<%p> / ", p);
+	printf("\n---------------------------\n");
+	ft_free_malloc(p);
 }
 
 char	**ft_free_malloc(char **str)

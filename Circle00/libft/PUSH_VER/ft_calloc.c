@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc_finish.c                                 :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 04:13:53 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/17 16:24:01 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/20 23:24:18 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	char	*array;
+	void	*array;
 
-	array = malloc(size * count);
+	array = (void *)malloc(size * count);
 	if (!array)
 		return (NULL);
-	while (count--)
-		array[count] = 0;
+	ft_bzero(array, size * count);
 	return (array);
 }

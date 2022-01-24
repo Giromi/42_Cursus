@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 23:07:39 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/17 16:56:21 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/24 17:31:58 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_putnbr_fd(int n, int fd)
 		return ;
 	}
 	ft_putnbr_fd(n / 10, fd);
-	if (n > 0)
+	if (n >= 0)
 		ft_putchar_fd(n % 10 + '0', fd);
 	else
 		ft_putchar_fd(-(n % 10) + '0', fd);

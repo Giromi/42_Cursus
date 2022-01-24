@@ -32,7 +32,7 @@ int main(void)
 void check(char *ca, const void *s, int c, size_t n)
 {
 	char	*re = memchr(s, c, n);
-		*my = ft_memchr(s, c, n);
+	char	*my = ft_memchr(s, c, n);
 	char	cc = c;
 	printf("ori  : %s @ %p\n", s, s);
 	printf("find : %u, %d\n", cc, c);

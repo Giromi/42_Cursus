@@ -1,13 +1,12 @@
-
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-#    Updated: 2022/01/21 21:00:44 by minsuki2         ###   ########.fr        #
-#    Updated: 2021/12/20 16:45:46 by minsuki2         ###   ########.fr        #
+#    Created: 2022/01/24 18:14:29 by minsuki2          #+#    #+#              #
+#    Updated: 2022/01/24 18:14:51 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +18,6 @@ CURRENT_DIR = ./
 INCLUDES = ./libft.h
 INC = -I./
 
-#-------------------------------Part1
 SRCS_FILES = ft_isalpha.c	\
 			 ft_isdigit.c	\
 			 ft_isalnum.c	\
@@ -44,7 +42,6 @@ SRCS_FILES = ft_isalpha.c	\
 			 ft_calloc.c	\
 			 ft_strdup.c
 
-#-------------------------------Part2
 SRCS_FILES += ft_putchar_fd.c	\
 			  ft_putstr_fd.c	\
 			  ft_putnbr_fd.c	\
@@ -57,7 +54,6 @@ SRCS_FILES += ft_putchar_fd.c	\
 			  ft_striteri.c		\
 			  ft_strmapi.c
 
-#-------------------------------Bonus
 BONUS_SRCS_FILES = ft_lstnew.c			\
 			 	   ft_lstadd_front.c	\
 			 	   ft_lstsize.c			\
@@ -68,11 +64,8 @@ BONUS_SRCS_FILES = ft_lstnew.c			\
 				   ft_lstiter.c			\
 			 	   ft_lstmap.c
 
-
 SRCS ?= $(SRCS_FILES)
 OBJS = $(SRCS:.c=.o)
-
-#-------------------------------
 
 all: $(NAME)
 

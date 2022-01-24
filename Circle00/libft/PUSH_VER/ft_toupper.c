@@ -6,11 +6,9 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 20:35:42 by minsuki2          #+#    #+#             */
-/*   Updated: 2021/12/13 20:36:06 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/24 10:41:07 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 int	ft_toupper(int c)
 {

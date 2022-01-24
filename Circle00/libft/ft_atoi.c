@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 12:27:51 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/20 13:11:30 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/24 14:34:34 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,9 @@ int	ft_atoi(const char *str)
 
 static	size_t	make_max(int sign)
 {
-	size_t	tmp_max;
-
 	if (sign == -1)
-		tmp_max = (size_t)LONG_MIN;
-	else
-		tmp_max = (size_t)LONG_MAX;
-	return (tmp_max);
+		return ((size_t)LONG_MIN);
+	return ((size_t)LONG_MAX);
 }
 
 static	int	ft_isspace(int c)
@@ -65,10 +61,7 @@ static	int	plma_check(int c, int *sign_ptr)
 
 	n = 0;
 	if (c == '+' || c == '-')
-	{
-		if (c == '-')
+		if (n++ + 1 && c == '-')
 			*sign_ptr *= -1;
-		n++;
-	}
 	return (n);
 }

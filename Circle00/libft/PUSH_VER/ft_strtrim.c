@@ -6,14 +6,14 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 00:12:31 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/23 14:38:36 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/24 15:16:36 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	check_size(char const *s, char const *set, size_t *idx, \
-		size_t set_len);
+static size_t	check_size(char const *s, char const *set, size_t *idx,
+					size_t set_len);
 static size_t	cmp_set(char const *str, char const *set, size_t set_size);
 
 char	*ft_strtrim(char const *s1, char const *set)
@@ -26,18 +26,14 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (!s1 || !set)
 		return (NULL);
 	idx = 0;
-	len = ft_strlen(s1);
 	set_len = ft_strlen(set);
 	len = check_size(s1, set, &idx, set_len);
-	dst = malloc(sizeof(char) * len + 1);
-	if (!dst)
-		return (NULL);
-	ft_strlcpy(dst, s1 + idx, len + 1);
+	dst = ft_substr(s1, idx, len);
 	return (dst);
 }
 
-static size_t	check_size(char const *s, char const *set, size_t *idx, \
-		size_t set_len)
+static size_t	check_size(char const *s, char const *set, size_t *idx,
+					size_t set_len)
 {
 	size_t	e_idx;
 

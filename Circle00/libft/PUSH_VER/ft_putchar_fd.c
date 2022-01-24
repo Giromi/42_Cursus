@@ -6,11 +6,11 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 17:51:37 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/21 00:46:56 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/24 17:41:30 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
 void	ft_putchar_fd(char c, int fd)
 {

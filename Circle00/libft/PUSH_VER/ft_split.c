@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 00:11:55 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/21 20:23:34 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/24 15:50:56 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	ea = count_words(s, c);
-	ptr = malloc(sizeof(char *) * (ea + 1));
+	ptr = (char **)malloc(sizeof(char *) * (ea + 1));
 	if (!ptr)
 		return (NULL);
 	i = 0;
@@ -57,7 +57,7 @@ static size_t	count_words(char const *str, char c)
 		if (pos)
 		{
 			i = pos - str + 1;
-			if (str[i] != c && str[i])
+			if (str[i] && str[i] != c)
 				cnt++;
 		}
 	}
@@ -66,7 +66,7 @@ static size_t	count_words(char const *str, char c)
 
 static char	*make_ptr(char const *str, size_t *j, char c)
 {
-	size_t	idx;
+	size_t	idx_n_len;
 	size_t	str_len;
 	char	*dst;
 	char	*pos;
@@ -75,11 +75,11 @@ static char	*make_ptr(char const *str, size_t *j, char c)
 	while (str[*j] == c)
 		(*j)++;
 	pos = ft_strchr(str + *j, c);
-	idx = pos - str;
-	if (idx > str_len)
-		idx = str_len;
-	dst = ft_substr(str, (unsigned int)*j, idx - *j);
-	*j = idx;
+	idx_n_len = pos - str;
+	if (idx_n_len > str_len)
+		idx_n_len = str_len;
+	dst = ft_substr(str, (unsigned int)*j, idx_n_len - *j);
+	*j = idx_n_len;
 	return (dst);
 }
 

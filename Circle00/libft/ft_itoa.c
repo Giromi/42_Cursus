@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 04:24:36 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/21 04:50:01 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/24 16:19:41 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	itoa_nbr(int n, char *dst, size_t len)
 		return ;
 	}
 	itoa_nbr(n / 10, dst, len - 1);
-	if (n > 0)
+	if (n >= 0)
 		dst[len - 1] = n % 10 + '0';
 	else
 		dst[len - 1] = -(n % 10) + '0';

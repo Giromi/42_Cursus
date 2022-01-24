@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/17 17:42:18 by alelievr          #+#    #+#             */
-/*   Updated: 2022/01/20 23:22:08 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/24 17:58:52 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1834,7 +1834,7 @@ void			test_ft_calloc_too_big(void *ptr) {
 
 void            test_ft_calloc(void) {
 
-	//add_fun_subtest(test_ft_calloc_free);
+	add_fun_subtest(test_ft_calloc_free);
 	add_fun_subtest(test_ft_calloc_malloc_null);
 	add_fun_subtest(test_ft_calloc_basic);
 	add_fun_subtest(test_ft_calloc_zero);

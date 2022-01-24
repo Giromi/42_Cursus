@@ -1,7 +1,7 @@
 #!/bin/bash
 echo -e "\033[32;1m"NORM"\033[m"
 read $a
-norminette ./*.c ./*.h
+norminette ./PUSH_VER/*.c ./PUSH_VER/*.h
 echo -e "\033[32;1m"LIBFT TEST"\033[m"
 read $a
 cd Libftest/
@@ -17,29 +17,29 @@ read $a
 cd libft-unit-test/
 make f
 cd ..
-make fclean
+make fclean -C PUSH_VER/
 echo -e "\033[32;1m"libftTester"\033[m"
 read $a
 cd libftTester/
-make a
+make a -C PUSH_VER/
 cd ..
 echo -e "\033[32;1m"make fclean"\033[m"
 read $a
 make
-make fclean
+make fclean -C PUSH_VER/
 ls
 echo -e "\033[32;1m"make clean"\033[m"
 read $a
 make
-make clean
+make clean -C PUSH_VER/
 ls
 echo -e "\033[32;1m"make all"\033[m"
 read $a
-make all
+make all -C PUSH_VER/
 ls
 echo -e "\033[32;1m"make bonus"\033[m"
 read $a
-make bonus
+make bonus -C PUSH_VER/
 ls
 echo -e "\033[32;1m"relink"\033[m"
 read $a

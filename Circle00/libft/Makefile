@@ -6,7 +6,7 @@
 #    By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 13:56:28 by minsuki2          #+#    #+#              #
-#    Updated: 2022/01/21 03:44:18 by minsuki2         ###   ########.fr        #
+#    Updated: 2022/01/24 17:31:50 by minsuki2         ###   ########.fr        #
 #    Updated: 2022/01/12 20:16:13 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -115,7 +115,7 @@ $(TARGET): $(NAME) $(MAIN) $(INCLUDES)
 # push---------------------------------------------
 push: $(PUSH)
 	@echo --------------------------------
-	@echo $^ Copying... | sed 's/ /\n/g'
+	@echo $^ Copying... | tr " " "\n"
 	@cp $^ $(PUSH_DIR)
 #@rename -f 's///' $(PUSH_DIR)*
 #@rename -f 's/_[2-9](st|nd|rd|th)//' $(PUSH_DIR)*

@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 00:12:31 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/24 15:16:36 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/24 15:11:30 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ char	*ft_strtrim(char const *s1, char const *set)
 	idx = 0;
 	set_len = ft_strlen(set);
 	len = check_size(s1, set, &idx, set_len);
-	dst = ft_substr(s1, idx, len);
+	dst = malloc(sizeof(char) * len + 1);
+	if (!dst)
+		return (NULL);
+	ft_strlcpy(dst, s1 + idx, len + 1);
 	return (dst);
 }
 

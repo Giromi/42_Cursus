@@ -6,15 +6,14 @@
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 18:14:29 by minsuki2          #+#    #+#              #
-#    Updated: 2022/01/24 18:14:51 by minsuki2         ###   ########.fr        #
+#    Updated: 2022/01/24 20:22:40 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-NAME = libft.a
+NAME = ./libft.a
 ARFLAGS = rcus
-CURRENT_DIR = ./
 INCLUDES = ./libft.h
 INC = -I./
 
@@ -73,7 +72,7 @@ $(NAME): $(OBJS)
 	@echo $@ Making...
 	$(AR) $(ARFLAGS) $@ $^
 
-%.o: %.c $(CURRENT_DIR)$(INCLUDES)
+%.o: %.c $(INCLUDES)
 	@echo $@ Making...
 	$(CC) $(INC) $(CFLAGS) -c $<
 
@@ -81,7 +80,7 @@ clean:
 	$(RM) $(SRCS_FILES:.c=.o) $(BONUS_SRCS_FILES:.c=.o)
 
 fclean: clean
-	$(RM) $(CURRENT_DIR)$(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 

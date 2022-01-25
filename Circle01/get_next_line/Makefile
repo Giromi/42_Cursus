@@ -1,65 +1,25 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-NAME = libft.a
 ARFLAGS = rcus
 CURRENT_DIR = ./
 INCLUDES = ./libft.h
 MAIN = ../Main/main.c
 INC = -I./
 
+
 TARGET = a.out
 PUSH_DIR = PUSH_VER/
+BUFFER_SIZE ?= 1;
 
 #-------------------------------
 
-#-------------------------------Part1
-SRCS_FILES = ft_isalpha.c		\
-			 ft_isdigit.c		\
-			 ft_isalnum.c		\
-			 ft_isascii.c		\
-			 ft_isprint.c		\
-			 ft_strlen.c		\
-			 ft_memset.c		\
-			 ft_bzero.c			\
-			 ft_memcpy.c		\
-			 ft_memmove.c		\
-			 ft_toupper.c		\
-			 ft_tolower.c		\
-			 ft_strchr.c		\
-			 ft_strrchr.c		\
-			 ft_memchr.c		\
-			 ft_strlcpy.c		\
-			 ft_strlcat.c		\
-			 ft_strncmp.c		\
-			 ft_memcmp.c		\
-			 ft_atoi.c			\
-			 ft_strnstr.c		\
-			 ft_calloc.c		\
-			 ft_strdup.c
+#-------------------------------Mandatory Part
+SRCS_FILES = get_next_line.c		\
+			 get_next_line_utils.c	\
 
-#-------------------------------Part2
-SRCS_FILES += ft_putchar_fd.c		\
-			  ft_putstr_fd.c		\
-			  ft_putnbr_fd.c		\
-			  ft_putendl_fd.c		\
-			  ft_substr.c			\
-			  ft_strjoin.c		\
-			  ft_strtrim.c		\
-			  ft_itoa.c			\
-			  ft_split.c			\
-			  ft_strmapi.c		\
-			  ft_striteri.c
-
-#-------------------------------Bonus
-BONUS_SRCS_FILES = ft_lstnew.c			\
-			 	   ft_lstlast.c			\
-			 	   ft_lstsize.c			\
-			 	   ft_lstadd_front.c		\
-			 	   ft_lstadd_back.c		\
-			 	   ft_lstdelone.c			\
-			 	   ft_lstclear.c			\
-				   ft_lstiter.c			\
-			 	   ft_lstmap.c
+#-------------------------------Bonus Part
+BONUS_SRCS_FILES = get_next_line_bonus.c			\
+			 	   get_next_line_utils_bonus.c		\
 
 
 SRCS ?= $(SRCS_FILES)
@@ -74,13 +34,6 @@ PUSH = $(SRCS) $(BONUS_SRCS_FILES)
 # SRCS = $(, $(addsuffix .c, $(FILES)))
 #
 
-all: $(NAME)
-
-$(NAME): $(OBJS)
-	@echo --------------------------------
-	@echo $@ Making...
-	$(AR) $(ARFLAGS) $@ $^
-
 %.o: %.c $(CURRENT_DIR)$(INCLUDES)
 	$(CC) $(INC) $(CFLAGS) -c $<
 
@@ -90,15 +43,11 @@ exe: bonus $(TARGET)
 $(TARGET): $(NAME) $(MAIN) $(INCLUDES)
 	@echo --------------------------------
 	@echo $@ Making...
-	$(CC) -g $(MAIN) -I../libft/ -L./ -lft
+	$(CC) -D BUFFER_SIZE=$(BUFFER_SIZE) $(MAIN) -I../libft/
 
 %.out: %.c bonus $(NAME) $(MAIN) $(INCLUDES)
-	$(CC) -g $(addprefix $(MAIN:%.c=%)_, $(<:ft_%=%)) -I../libft $< -L./ -lft
+	$(CC) -g $(addprefix $(MAIN:%.c=%)_, $(<:ft_%=%)) -I../gnl $< -L./ -lft
 
-# main:
-#     @echo $(addsuffix
-
-# push---------------------------------------------
 push: $(PUSH)
 	@echo --------------------------------
 	@echo $^ Copying... | tr " " "\n"

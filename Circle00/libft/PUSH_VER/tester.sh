@@ -37,7 +37,7 @@ make a
 cd ..
 rm -rf Libftest/ libft-war-machine/ libft-unit-test/ libftTester/
 echo -e "\033[32;1m"make fclean"\033[m"
-# read $a
+read $a
 make
 make fclean
 ls

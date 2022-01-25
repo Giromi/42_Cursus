@@ -6,7 +6,7 @@
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 18:14:29 by minsuki2          #+#    #+#              #
-#    Updated: 2022/01/24 20:22:40 by minsuki2         ###   ########.fr        #
+#    Updated: 2022/01/25 14:27:19 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,11 +69,9 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@echo $@ Making...
 	$(AR) $(ARFLAGS) $@ $^
 
 %.o: %.c $(INCLUDES)
-	@echo $@ Making...
 	$(CC) $(INC) $(CFLAGS) -c $<
 
 clean:

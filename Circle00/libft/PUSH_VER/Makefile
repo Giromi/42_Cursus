@@ -6,7 +6,7 @@
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 18:14:29 by minsuki2          #+#    #+#              #
-#    Updated: 2022/01/25 14:58:58 by minsuki2         ###   ########.fr        #
+#    Updated: 2022/01/25 17:34:04 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,20 +69,29 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
+	@echo ----------------------------------------------------
+	@echo $@ Making...
 	$(AR) $(ARFLAGS) $@ $^
 
 %.o: %.c $(INCLUDES)
+	@echo $@ Making...
 	$(CC) $(INC) $(CFLAGS) -c $<
 
 clean:
+	@echo ----------------------------------------------------
+	@echo SRCS Removing...
 	$(RM) $(SRCS_FILES:.c=.o) $(BONUS_SRCS_FILES:.c=.o)
 
 fclean: clean
+	@echo ----------------------------------------------------
+	@echo $(NAME:./%=%) Removing...
 	$(RM) $(NAME)
 
 re: fclean all
 
 bonus:
+	@echo ----------------------------------------------------
+	@echo Making Bonus!...
 	@$(MAKE) "SRCS = $(SRCS_FILES) $(BONUS_SRCS_FILES)" all
 
 .PHONY: all clean fclean re bonus

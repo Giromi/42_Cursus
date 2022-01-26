@@ -4,7 +4,7 @@ NAME = libft.a
 ARFLAGS = rcus
 CURRENT_DIR = ./
 INCLUDES = ./libft.h
-MAIN = ../Main/main.c
+MAIN = ./Main/main.c
 INC = -I./
 
 TARGET = a.out
@@ -62,7 +62,7 @@ BONUS_SRCS_FILES = ft_lstnew.c			\
 			 	   ft_lstmap.c
 
 
-SRCS ?= $(SRCS_FILES)
+SRCS = $(SRCS_FILES)
 OBJS = $(SRCS:.c=.o)
 
 # FILENAME = $(SRCS:ft_%=%) # 파일 경로 삭제
@@ -90,10 +90,10 @@ exe: bonus $(TARGET)
 $(TARGET): $(NAME) $(MAIN) $(INCLUDES)
 	@echo --------------------------------
 	@echo $@ Making...
-	$(CC) -g $(MAIN) -I../libft/ -L./ -lft
+	$(CC) -g $(MAIN) -I./ -L./ -lft
 
 %.out: %.c bonus $(NAME) $(MAIN) $(INCLUDES)
-	$(CC) -g $(addprefix $(MAIN:%.c=%)_, $(<:ft_%=%)) -I../libft $< -L./ -lft
+	$(CC) -g $(addprefix $(MAIN:%.c=%)_, $(<:ft_%=%)) -I./ $< -L./ -lft
 
 # main:
 #     @echo $(addsuffix

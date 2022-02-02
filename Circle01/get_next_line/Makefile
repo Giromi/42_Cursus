@@ -1,15 +1,16 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 ARFLAGS = rcus
-CURRENT_DIR = ./
-INCLUDES = ./libft.h
-MAIN = ../Main/main.c
+INCLUDES = ./get_next_line.h
+MAIN = ./Main/main.c
 INC = -I./
 
 
 TARGET = a.out
+FD_TARGET = fd.out
 PUSH_DIR = PUSH_VER/
-BUFFER_SIZE ?= 1;
+BS = 0
+FM = 1024
 
 #-------------------------------
 
@@ -22,48 +23,19 @@ BONUS_SRCS_FILES = get_next_line_bonus.c			\
 			 	   get_next_line_utils_bonus.c		\
 
 
-SRCS ?= $(SRCS_FILES)
-OBJS = $(SRCS:.c=.o)
+SRCS = $(SRCS_FILES)
 
-# FILENAME = $(SRCS:ft_%=%) # 파일 경로 삭제
-# MAIN_FILE = $(addprefix main_, $(FILENAME))
-#-------------------------------
 PUSH = $(SRCS) $(BONUS_SRCS_FILES)
-#TMP = $(wildcard $(PUSH_DIR)*.c)
-# DONE = $(TMP:$(PUSH_DIR)%=%) # 파일 경로 삭제
-# SRCS = $(, $(addsuffix .c, $(FILES)))
-#
 
-%.o: %.c $(CURRENT_DIR)$(INCLUDES)
-	$(CC) $(INC) $(CFLAGS) -c $<
-
-# exe---------------------------------------------
-exe: bonus $(TARGET)
-
-$(TARGET): $(NAME) $(MAIN) $(INCLUDES)
+exe: $(SRCS) $(MAIN) $(INCLUDES)
 	@echo --------------------------------
 	@echo $@ Making...
-	$(CC) -D BUFFER_SIZE=$(BUFFER_SIZE) $(MAIN) -I../libft/
-
-%.out: %.c bonus $(NAME) $(MAIN) $(INCLUDES)
-	$(CC) -g $(addprefix $(MAIN:%.c=%)_, $(<:ft_%=%)) -I../gnl $< -L./ -lft
+	$(CC) -g $(CFLAGS) -D BUFFER_SIZE=$(BS) $(MAIN) $(SRCS) -I./
 
 push: $(PUSH)
 	@echo --------------------------------
 	@echo $^ Copying... | tr " " "\n"
 	@cp $^ $(PUSH_DIR)
-#@rename -f 's///' $(PUSH_DIR)*
-#@rename -f 's/_[2-9](st|nd|rd|th)//' $(PUSH_DIR)*
-#@ls -1 $(PUSH_DIR)
-
-
-# bring:
-#     cp $(PUSH_DIR)*.c .
-
-# pclean:
-# #@echo $(DONE) | sed 's/ /\n/g'
-#     @echo
-#     $(RM) $(DONE)
 
 # clean--------------------------------------------
 
@@ -73,12 +45,12 @@ clean:
 
 fclean: clean
 	@echo
-	$(RM) $(CURRENT_DIR)$(NAME)
+	$(RM) $(CURRENT_DIR)$(TARGET)
 
-re: fclean all exe
+re: fclean exe
 
 bonus:
 	@echo Making Bonus!...
-	@$(MAKE) "SRCS = $(SRCS_FILES) $(BONUS_SRCS_FILES)" all #-p > makefile.txt
+	@$(MAKE) "SRCS = $(BONUS_SRCS_FILES)" exe #-p > makefile.txt
 
 .PHONY: all clean fclean re bonus push exe

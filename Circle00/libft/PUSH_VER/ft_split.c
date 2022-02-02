@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 00:11:55 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/01/24 15:50:56 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/01/26 17:30:21 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**ft_split(char const *s, char c)
 	while (i < ea)
 	{
 		ptr[i++] = make_ptr((char *)s, &j, c);
-		if (!ptr)
+		if (!ptr[i - 1])
 			return (ft_error_malloc(ptr, ea + 1));
 	}
 	ptr[ea] = NULL;

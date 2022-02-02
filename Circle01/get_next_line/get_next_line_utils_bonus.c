@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:02:34 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/02 18:17:00 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/02/02 21:02:34 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ char	*ft_strdup(const char *s1)
 	char	*dup;
 	size_t	len;
 
+	if (!s1)
+		return (NULL);
 	len = 0;
 	while (s1[len])
 		len++;

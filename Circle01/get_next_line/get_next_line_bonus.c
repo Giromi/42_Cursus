@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 16:00:16 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/02 20:45:24 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/02/02 21:00:03 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char 	*get_next_line_bonus(int fd)
 	static t_list	*fd_lst[FD_MAX];
 	ssize_t			rd;
 	size_t			line_len;
+	char			*line;
 
 	if (fd < 0 || fd > FD_MAX || BUFFER_SIZE <= 0 || FD_MAX <= 0)
 		return (NULL);
@@ -32,7 +33,10 @@ char 	*get_next_line_bonus(int fd)
 		ft_lstfclean(&fd_lst[fd]);
 		return (NULL);
 	}
-	return (make_line(&fd_lst[fd], line_len));
+	line = make_line(&fd_lst[fd], line_len);
+	if (!line)
+		return (NULL);
+	return (line);
 }
 
 static ssize_t	line_check_len(int fd, t_list **lst, size_t *len)

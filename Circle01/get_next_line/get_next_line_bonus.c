@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 16:00:16 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/02 21:05:00 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/02/02 21:28:58 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ static char	*make_line(t_list **lst, size_t line_len)
 	char	*last;
 	t_list	*first;
 	size_t	i;
+	char 	*pos;
 
 	line = (char *)malloc(sizeof(char) * (line_len + 1));
 	if (!line)
@@ -104,8 +105,11 @@ static char	*make_line(t_list **lst, size_t line_len)
 			last = (*lst)->content;
 		*lst = (*lst)->next;
 	}
-	last = ft_strdup(ft_strchr_len(last, '\n') + 1);
 	ft_lstfclean(&first);
+	pos = ft_strchr_len(last, '\n');
+	if (!pos)
+		return (line);
+	last = ft_strdup(pos + 1);
 	ft_lstadd_newstr_back(lst, last);
 	return (line);
 }

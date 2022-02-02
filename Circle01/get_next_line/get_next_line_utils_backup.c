@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/02 17:02:34 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/02 21:11:42 by minsuki2         ###   ########.fr       */
+/*   Created: 2022/01/25 15:04:11 by minsuki2          #+#    #+#             */
+/*   Updated: 2022/02/01 03:24:15 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 char	*ft_strchr_len(const char *s, int c)
 {
@@ -45,35 +45,34 @@ size_t	ft_strlcpy(char *dst, char const *src, size_t dstsize)
 	return (len);
 }
 
-char	*ft_strdup(const char *s1)
-{
-	char	*dup;
-	size_t	len;
 
-	if (!s1 || !*s1)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*ptr;
+	size_t	s_len;
+
+	if (!s)
 		return (NULL);
-	len = 0;
-	while (s1[len])
-		len++;
-	dup = (char *)malloc(sizeof(char) * len + 1);
-	if (!dup)
+	s_len = 0;
+	while (s[s_len])
+		s_len++;
+	if (start >= s_len)
+		len = 0;
+	if (len >= s_len)
+		len = s_len;
+	ptr = malloc(sizeof(char) * (len + 1));
+	if (!ptr)
 		return (NULL);
-	ft_strlcpy(dup, s1, len + 1);
-	return (dup);
+	ft_strlcpy(ptr, s + start, len + 1);
+	return (ptr);
 }
 
-void	ft_lstadd_newstr_back(t_list **lst, char *content)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*tmp;
-	t_list	*new;
 
-	if (!lst || !content)
+	if (!lst || !new)
 		return ;
-	new = malloc(sizeof(t_list));
-	if (!new)
-		return ;
-	new->content = content;
-	new->next = NULL;
 	if (!*lst)
 		*lst = new;
 	else
@@ -85,11 +84,14 @@ void	ft_lstadd_newstr_back(t_list **lst, char *content)
 	}
 }
 
-t_list	*ft_lstlast(t_list *lst)
+t_list	*ft_lstnew_str(char *content)
 {
-	if (!lst)
+	t_list	*new;
+
+	new = malloc(sizeof(t_list));
+	if (!new)
 		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
+	new->content = content;
+	new->next = NULL;
+	return (new);
 }

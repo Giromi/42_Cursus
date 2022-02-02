@@ -29,8 +29,8 @@ int main(void)
 		printf("\nwhat : ");
 		scanf("%d", &fd);
 		printf("\nfd : %d = ", fd);
-		// line = get_next_line(fd);
-		line = get_next_line_bonus(fd);
+		line = get_next_line(fd);
+		// line = get_next_line_bonus(fd);
 		printf("%s \t@ %p", line, line);
 		free(line);
 	}

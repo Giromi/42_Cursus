@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 16:00:16 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/02 21:00:03 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/02/02 21:05:00 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ char 	*get_next_line_bonus(int fd)
 		return (NULL);
 	}
 	line = make_line(&fd_lst[fd], line_len);
-	if (!line)
-		return (NULL);
 	return (line);
 }
 

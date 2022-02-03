@@ -1,3 +1,4 @@
+
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -6,7 +7,6 @@
 
 #include "get_next_line.h"
 char 			*get_next_line_bonus(int fd);
-char 			*get_next_line(int fd);
 int				ft_atoi(const char *str);
 static	int		plma_check(int c, int *sign);
 static	int		ft_isspace(int c);
@@ -19,7 +19,7 @@ int main(void)
 {
 	int		fd;
 	size_t	n;
-	char 	*line = NULL;
+	char 	*line;
 
 	/* 3 */		open_fd("gnl_files/test1");
 	/* 4 */		open_fd("gnl_files/test2");
@@ -36,38 +36,35 @@ int main(void)
 
 	while (1)
 	{
-		if (!line)
-		{
-			printf("\nwhat : ");
-			scanf("%d", &fd);
-		}
-		if (fd == -1)
-			break ;
 		n = 0;
+		printf("\nwhat : ");
+		scanf("%d", &fd);
 		printf("\nfd : %d = ", fd);
 		line = get_next_line(fd);
-		printf("%s @ %p\n", line, line);
+		// line = get_next_line_bonus(fd);
+		if (line)
+		{
+			while (line[n++])
+				;
+			for (size_t i = 0; i < n; i++)
+				printf("%c", line[i]);
+			// printf("\n------------------------------\n");
+			// system("leaks -quiet a.out");
+			// printf("------------------------------\n");
+		}
+		else
+		{
+			printf("%s \t\t\t\t\t\t@ %p\n", line, line);
+			printf("close fd \"%d\"", fd);
+			close(fd);
+		}
 		free(line);
 	}
-
-	printf("close fd => ");
-	for (int i = 3; i <= 13; i++)
-	{
-		printf("\"%d\" ", i);
+	for (int i = 0; i < 10; i++)
 		close(i);
-	}
-	printf("\n");
-	system("leaks -quiet a.out");
 	return (0);
 }
 
-				// while (line[n++])
-				//     ;
-				// for (size_t i = 0; i < n; i++)
-				//     printf("%c", line[i]);
-				// printf("\n------------------------------\n");
-				// system("leaks -quiet a.out");
-				// printf("------------------------------\n");
 void open_fd(char *name)
 {
 	int fd;

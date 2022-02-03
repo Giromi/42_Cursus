@@ -1,8 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 ARFLAGS = rcus
-INCLUDES = ./get_next_line.h
-MAIN = ./Main/main.c
 INC = -I./
 
 
@@ -22,6 +20,10 @@ SRCS_FILES = get_next_line.c		\
 BONUS_SRCS_FILES = get_next_line_bonus.c			\
 			 	   get_next_line_utils_bonus.c		\
 
+MAIN = ./Main/main.c
+
+INCLUDES = ./get_next_line.h 		\
+		   ./get_next_line_bonus.h
 
 SRCS = $(SRCS_FILES)
 
@@ -33,6 +35,11 @@ exe: $(SRCS) $(MAIN) $(INCLUDES)
 	$(CC) -g $(CFLAGS) -D BUFFER_SIZE=$(BS) $(MAIN) $(SRCS) -I./
 
 push: $(PUSH)
+	@echo --------------------------------
+	@echo $^ Copying... | tr " " "\n"
+	@cp $^ $(PUSH_DIR)
+
+push_inc: $(INCLUDES)
 	@echo --------------------------------
 	@echo $^ Copying... | tr " " "\n"
 	@cp $^ $(PUSH_DIR)
@@ -51,6 +58,9 @@ re: fclean exe
 
 bonus:
 	@echo Making Bonus!...
-	@$(MAKE) "SRCS = $(BONUS_SRCS_FILES)" exe #-p > makefile.txt
+	@$(MAKE) "SRCS = $(BONUS_SRCS_FILES)	\
+			  MAIN = ./MAIN/main_bonus.c	\
+	" exe #-p > makefile.txt
+
 
 .PHONY: all clean fclean re bonus push exe

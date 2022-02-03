@@ -5,77 +5,87 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/25 16:20:15 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/01 15:59:59 by minsuki2         ###   ########.fr       */
+/*   Created: 2022/02/01 16:00:16 by minsuki2          #+#    #+#             */
+/*   Updated: 2022/02/03 05:49:57 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static size_t	line_check_len(int fd, t_list **lst, size_t *left_len);
+static ssize_t	line_check_len(int fd, t_list **lst, size_t *len);
 static void		ft_lstfclean(t_list **lst);
-static char		*make_line(t_list **lst, size_t line_len, size_t left_len);
+static char		*make_line(t_list **lst, size_t line_len);
+static t_list	*read_check(int fd, t_list **lst, ssize_t *rd);
 
-char 	*get_next_line(int fd)
+char	*get_next_line(int fd)
 {
 	static t_list	*fd_lst[FD_MAX];
-	char 			*line;
+	ssize_t			rd;
 	size_t			line_len;
-	size_t			left_len;
+	char			*line;
 
-	if (fd <= 0 || BUFFER_SIZE <= 0 || FD_MAX <= 0)
+	if (fd < 0 || fd > FD_MAX || BUFFER_SIZE <= 0 || FD_MAX <= 0)
 		return (NULL);
-	left_len = 0;
-	line = NULL;
-	if (fd_lst[fd])
-		line = ft_strchr_len(fd_lst[fd]->content, '\n');
-	if (!line)
-		line_len = line_check_len(fd, &fd_lst[fd], &left_len);
-	else
-		line_len = line - fd_lst[fd]->content + 1;
-	if (!line_len)
+	line_len = 0;
+	rd = line_check_len(fd, &fd_lst[fd], &line_len);
+	if (rd == -1 || (!rd && !line_len))
+	{
+		ft_lstfclean(&fd_lst[fd]);
 		return (NULL);
-	line = make_line(&fd_lst[fd], line_len, left_len);
-	ft_lstfclean(&fd_lst[fd]);
+	}
+	line = make_line(&fd_lst[fd], line_len);
 	return (line);
 }
 
-static size_t	line_check_len(int fd, t_list **lst, size_t *left_len)
+static ssize_t	line_check_len(int fd, t_list **lst, size_t *len)
 {
 	char			*pos;
+	t_list			*tmp;
 	ssize_t			rd;
-	size_t			size;
-	char			*buf;
+	size_t			content_len;
 
-	pos = NULL;
-	size = 0;
-	if ((*lst))
-		while ((*lst)->content[size])
-			size++;
-	while (!pos)
+	if (*lst)
 	{
-		buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-		if (!buf)
-			return (0);
-		rd = read(fd, buf, BUFFER_SIZE);
-		if (rd <= 0)
-			break;
-		buf[rd] = '\0';
-		pos = ft_strchr_size(buf, '\n');
-		size += rd;
+		content_len = 0;
+		pos = ft_strlen_chr((*lst)->content, '\n', &content_len);
 		if (pos)
 		{
-			*left_size = rd - (pos - buf + 1);
-			size -= *left_len;
+			*len += (pos - (*lst)->content) + 1;
+			return (0);
 		}
-		ft_lstadd_back(lst, ft_lstnew_str(buf));
+		(*len) += content_len;
 	}
-	if (rd <= 0)
-		ft_lstfclean(lst);
-	return (size);
+	tmp = read_check(fd, lst, &rd);
+	if (tmp)
+		line_check_len(fd, &tmp, len);
+	return (rd);
 }
 
-static char	*make_line(t_list **lst, size_t line_len, size_t left_len)
+static t_list	*read_check(int fd, t_list **lst, ssize_t *rd)
+{
+	char	*buf;
+	t_list	*last;
+
+	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buf)
+	{
+		ft_lstfclean(lst);
+		*rd = -1;
+		return (NULL);
+	}
+	*rd = read(fd, buf, BUFFER_SIZE);
+	if (*rd > 0)
+	{
+		buf[*rd] = '\0';
+		last = ft_lstadd_back_last(lst, ft_lstnew_str(ft_strdup(buf)));
+	}
+	free(buf);
+	if (*rd <= 0)
+		return (NULL);
+	return (last);
+}
+
+static char	*make_line(t_list **lst, size_t line_len)
 {
 	char	*line;
 	char	*last;
@@ -86,20 +96,19 @@ static char	*make_line(t_list **lst, size_t line_len, size_t left_len)
 	if (!line)
 		return (NULL);
 	first = *lst;
+	i = 0;
 	while (*lst)
 	{
-		i = 0;
-		while (line[i])
-			i++;
-		ft_strlcpy(line + i, (*lst)->content, line_len + 1 - i);
+		ft_strlen_chr(line, 0, &i);
+		ft_strlcpy_only_size(line + i, (*lst)->content, line_len + 1 - i);
 		if (!(*lst)->next)
 			last = (*lst)->content;
 		*lst = (*lst)->next;
 	}
-	last = ft_substr(last, line_len - i, left_len);
+	last = ft_strlen_chr(last, '\n', &i);
+	if (last && *(last + 1))
+		*lst = ft_lstnew_str(ft_strdup(last + 1));
 	ft_lstfclean(&first);
-	*lst = ft_lstnew_str(last);
-	// ft_lstadd_back(&lst, ft_lstnew_str(last));
 	return (line);
 }
 

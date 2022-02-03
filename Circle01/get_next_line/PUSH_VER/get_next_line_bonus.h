@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:21:11 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/02 21:32:53 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/02/02 19:20:21 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 char	*ft_strchr_len(const char *s, int c);
 size_t	ft_strlcpy(char *dst, char const *src, size_t dstsize);
 char	*ft_strdup(const char *s1);
-char 	*get_next_line_bonus(int fd);
 
 typedef struct		s_list
 {

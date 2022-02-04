@@ -6,14 +6,14 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 16:00:16 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/03 10:00:45 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/02/03 23:30:54 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 static ssize_t	line_check_len(int fd, t_list **lst, size_t *len);
-static void		ft_lstfclean(t_list **lst);
+static void		*ft_lstfclean(t_list **lst);
 static char		*make_line(t_list **lst, size_t line_len);
 static t_list	*read_check(int fd, t_list **lst, ssize_t *rd);
 
@@ -22,19 +22,14 @@ char	*get_next_line(int fd)
 	static t_list	*fd_lst;
 	ssize_t			rd;
 	size_t			line_len;
-	char			*line;
 
-	if (fd < 0 || fd > FD_MAX || BUFFER_SIZE <= 0 || FD_MAX <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	line_len = 0;
 	rd = line_check_len(fd, &fd_lst, &line_len);
 	if (rd == -1 || (!rd && !line_len))
-	{
-		ft_lstfclean(&fd_lst);
-		return (NULL);
-	}
-	line = make_line(&fd_lst, line_len);
-	return (line);
+		return ((char *)ft_lstfclean(&fd_lst));
+	return (make_line(&fd_lst, line_len));
 }
 
 static ssize_t	line_check_len(int fd, t_list **lst, size_t *len)
@@ -57,7 +52,7 @@ static ssize_t	line_check_len(int fd, t_list **lst, size_t *len)
 	}
 	tmp = read_check(fd, lst, &rd);
 	if (tmp)
-		line_check_len(fd, &tmp, len);
+		rd = line_check_len(fd, &tmp, len);
 	return (rd);
 }
 
@@ -67,21 +62,16 @@ static t_list	*read_check(int fd, t_list **lst, ssize_t *rd)
 	t_list	*last;
 
 	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buf)
-	{
-		ft_lstfclean(lst);
-		*rd = -1;
-		return (NULL);
-	}
 	*rd = read(fd, buf, BUFFER_SIZE);
 	if (*rd > 0)
 	{
 		buf[*rd] = '\0';
 		last = ft_lstadd_back_last(lst, ft_lstnew_str(ft_strdup(buf)));
 	}
-	free(buf);
-	if (*rd <= 0)
-		return (NULL);
+	else
+		last = NULL;
+	if (buf)
+		free(buf);
 	return (last);
 }
 
@@ -112,12 +102,12 @@ static char	*make_line(t_list **lst, size_t line_len)
 	return (line);
 }
 
-static void	ft_lstfclean(t_list **lst)
+static void	*ft_lstfclean(t_list **lst)
 {
 	t_list	*tmp;
 
 	if (!lst)
-		return ;
+		return (NULL);
 	while (*lst)
 	{
 		tmp = (*lst)->next;
@@ -125,4 +115,5 @@ static void	ft_lstfclean(t_list **lst)
 		free(*lst);
 		*lst = tmp;
 	}
+	return (NULL);
 }

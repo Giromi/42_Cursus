@@ -5,21 +5,17 @@
 #include <unistd.h>
 
 #include "get_next_line.h"
-char 			*get_next_line_bonus(int fd);
-char 			*get_next_line(int fd);
-int				ft_atoi(const char *str);
-static	int		plma_check(int c, int *sign);
-static	int		ft_isspace(int c);
-static	size_t	make_max(int sign);
-int				ft_isdigit(int c);
-void 			open_fd(char *name);
-void			print_fd(int fd);
+char	*get_next_line(int fd);
+void	open_fd(char *name);
+void	print_fd(int fd);
+void	print_fd_name(int fd);
 
 int main(void)
 {
 	int		fd;
 	size_t	n;
 	char 	*line = NULL;
+	// char	buf[1];
 
 	/* 3 */		open_fd("gnl_files/test1");
 	/* 4 */		open_fd("gnl_files/test2");
@@ -32,14 +28,23 @@ int main(void)
 	/* 11 */	open_fd("gnl_files/41_with_nl");
 	/* 12 */	open_fd("gnl_files/43_no_nl");
 	/* 13 */	open_fd("gnl_files/43_with_nl");
-	
+	/* 14 */	open_fd("gnl_files/mong");
 
+
+	// printf("fd, NULL, 1 : %ld\n", read(7, NULL, 1));	// -1
+	// printf("fd, NULL, 0 : %ld\n", read(7, NULL, 0));	// -1
+	// printf("fd,  buf, 0 : %ld\n", read(7, buf, 0));		// 0
+
+	printf("BUFFER_SIZE = %d\n", BUFFER_SIZE);
 	while (1)
 	{
 		if (!line)
 		{
+			printf("------------------------------\n");
 			printf("\nwhat : ");
 			scanf("%d", &fd);
+			printf("------------------------------\n");
+			print_fd_name(fd);
 		}
 		if (fd == -1)
 			break ;
@@ -61,13 +66,6 @@ int main(void)
 	return (0);
 }
 
-				// while (line[n++])
-				//     ;
-				// for (size_t i = 0; i < n; i++)
-				//     printf("%c", line[i]);
-				// printf("\n------------------------------\n");
-				// system("leaks -quiet a.out");
-				// printf("------------------------------\n");
 void open_fd(char *name)
 {
 	int fd;
@@ -79,57 +77,26 @@ void open_fd(char *name)
 	}
 }
 
-int	ft_atoi(const char *str)
+void print_fd_name(int fd)
 {
-	int		sign;
-	int		c;
-	long	num;
-	size_t	i;
-	size_t	over_value;
-
-	i = 0;
-	num = 0;
-	sign = 1;
-	while (ft_isspace(str[i]))
-		i++;
-	i += plma_check(str[i], &sign);
-	over_value = make_max(sign);
-	while (ft_isdigit(str[i]) && str[i])
-	{
-		c = str[i] - '0';
-		if (num > (long)(over_value / 10) || (num == (long)(over_value / 10)
-					&& c > (int)(over_value % 10)))
-			return ((int)over_value);
-		num = num * 10 + (long)c;
-		i++;
-	}
-	return ((int)(sign * num));
+	if (fd == 10)
+		printf("[CASE : %s]\n", "41_no_nl");
+	else if (fd == 11)
+		printf("[CASE : %s]\n", "41_with_nl");
+	else
+		printf("exit\n");
 }
-
-static	size_t	make_max(int sign)
-{
-	if (sign == -1)
-		return ((size_t)LONG_MIN);
-	return ((size_t)LONG_MAX);
-}
-
-static	int	ft_isspace(int c)
-{
-	return ((c >= 0x09 && c <= 0x0d) || c == 0x20);
-}
-
-static	int	plma_check(int c, int *sign_ptr)
-{
-	size_t	n;
-
-	n = 0;
-	if (c == '+' || c == '-')
-		if (n++ + 1 && c == '-')
-			*sign_ptr *= -1;
-	return (n);
-}
-
-int	ft_isdigit(int c)
-{
-	return (c >= '0' && c <= '9');
-}
+				// while (line[n++])
+				//     ;
+				// for (size_t i = 0; i < n; i++)
+				//     printf("%c", line[i]);
+				// printf("\n------------------------------\n");
+				// system("leaks -quiet a.out");
+				// printf("------------------------------\n");
+				// while (line[n++])
+				//     ;
+				// for (size_t i = 0; i < n; i++)
+				//     printf("%c", line[i]);
+				// printf("\n------------------------------\n");
+				// system("leaks -quiet a.out");
+				// printf("------------------------------\n");

@@ -20,16 +20,16 @@ void gnl(int fd, char const * expectedReturn)
 	char	*gnlReturn = get_next_line(fd);
 	if (expectedReturn == NULL)
 	{
-		// printf("\n");
+		printf("\n");
 		check(gnlReturn == NULL);
-		// printf("\nmy : %s\nre : %s\n", gnlReturn, expectedReturn);
+		printf("\nmy : %s\nre : %s\n", gnlReturn, expectedReturn);
 	}
 	else
 	{
 		printf("\n");
 		check(!strcmp(gnlReturn, expectedReturn));
 		printf("\nmy : %s\nre : %s\n", gnlReturn, expectedReturn);
-	printf("\n");
+	// printf("\n");
 	}
 	free(gnlReturn);
 	iTest++;

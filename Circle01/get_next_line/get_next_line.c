@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 16:00:16 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/03 23:30:54 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/02/04 21:03:47 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ static ssize_t	line_check_len(int fd, t_list **lst, size_t *len)
 
 	if (*lst)
 	{
-		content_len = 0;
-		pos = ft_strlen_chr((*lst)->content, '\n', &content_len);
+		pos = ft_strlen_chr_init((*lst)->content, '\n', &content_len, 0);
 		if (pos)
 		{
 			*len += (pos - (*lst)->content) + 1;
@@ -85,19 +84,19 @@ static char	*make_line(t_list **lst, size_t line_len)
 	line = (char *)malloc(sizeof(char) * (line_len + 1));
 	if (!line)
 		return (NULL);
+	line[0] = '\0';
 	first = *lst;
 	i = 0;
 	while (*lst)
 	{
-		ft_strlen_chr(line, 0, &i);
-		ft_strlcpy_only_size(line + i, (*lst)->content, line_len + 1 - i);
+		ft_strlen_chr_init(line, 0, &i, 1);
+		ft_strlcat_dstlen(line, i, (*lst)->content, line_len + 1);
 		if (!(*lst)->next)
 			last = (*lst)->content;
 		*lst = (*lst)->next;
 	}
-	last = ft_strlen_chr(last, '\n', &i);
-	if (last && *(last + 1))
-		*lst = ft_lstnew_str(ft_strdup(last + 1));
+	if (last && *(last + line_len - i))
+		*lst = ft_lstnew_str(ft_strdup(last + line_len - i));
 	ft_lstfclean(&first);
 	return (line);
 }

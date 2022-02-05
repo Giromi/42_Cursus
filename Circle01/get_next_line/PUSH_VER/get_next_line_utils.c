@@ -6,34 +6,41 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:02:34 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/03 05:49:38 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/02/04 17:50:49 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strlen_chr(const char *s, int c, size_t *len)
+char	*ft_strlen_chr_init(const char *s, int c, size_t *len, int init)
 {
 	size_t	i;
 
+	if (!init)
+		*len = 0;
 	while (s[*len])
 		(*len)++;
 	i = 0;
-	while (c && i++ < *len)
-		if (s[i - 1] == (char)c)
-			return ((char *)s + i - 1);
+	while (c && i < *len)
+		if (s[i++] == (char)c)
+			return ((char *)s + (i - 1));
 	return (NULL);
 }
 
-size_t	ft_strlcpy_only_size(char *dst, char const *src, size_t src_size)
+size_t	ft_strlcat_dstlen(char *dst, size_t dst_len, char const *src,
+		size_t dstsize)
 {
-	if (src_size > 0)
-	{
-		dst[src_size - 1] = '\0';
-		while (src_size-- - 1)
-			dst[src_size - 1] = src[src_size - 1];
-	}
-	return (src_size);
+	size_t	src_len;
+
+	ft_strlen_chr_init(src, 0, &src_len, 0);
+	if (dst_len + 1 > dstsize)
+		return (src_len + dstsize);
+	if (dst_len + src_len + 1 < dstsize)
+		dstsize = src_len + dst_len + 1;
+	dst[dstsize - 1] = '\0';
+	while (dstsize-- - 1 > dst_len)
+		dst[dstsize - 1] = src[dstsize - dst_len - 1];
+	return (dst_len + src_len);
 }
 
 char	*ft_strdup(const char *s1)
@@ -43,12 +50,11 @@ char	*ft_strdup(const char *s1)
 
 	if (!s1)
 		return (NULL);
-	len = 0;
-	ft_strlen_chr(s1, 0, &len);
+	ft_strlen_chr_init(s1, 0, &len, 0);
 	dup = (char *)malloc(sizeof(char) * (len + 1));
 	if (!dup)
 		return (NULL);
-	ft_strlcpy_only_size(dup, s1, len + 1);
+	ft_strlcat_dstlen(dup, 0, s1, len + 1);
 	return (dup);
 }
 

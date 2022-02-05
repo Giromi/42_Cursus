@@ -6,19 +6,17 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:02:34 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/04 17:50:49 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/02/04 17:09:31 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strlen_chr_init(const char *s, int c, size_t *len, int init)
+char	*ft_strlen_chr(const char *s, int c, size_t *len)
 {
 	size_t	i;
 
-	if (!init)
-		*len = 0;
-	while (s[*len])
+	while (s[(*len)])
 		(*len)++;
 	i = 0;
 	while (c && i < *len)
@@ -27,12 +25,29 @@ char	*ft_strlen_chr_init(const char *s, int c, size_t *len, int init)
 	return (NULL);
 }
 
-size_t	ft_strlcat_dstlen(char *dst, size_t dst_len, char const *src,
+size_t	ft_strlcpy_only_size(char *dst, char const *src, size_t dstsize)
+{
+	size_t	len;
+
+	len = 0;
+	ft_strlen_chr(src, 0, &len);
+	if (dstsize > 0)
+	{
+		if (len + 1 < dstsize)
+			dstsize = len + 1;
+		dst[dstsize - 1] = '\0';
+		while (dstsize-- - 1)
+			dst[dstsize - 1] = src[dstsize - 1];
+	}
+	return (len);
+}
+
+size_t	ft_strlcat_dst_len(char *dst, size_t dst_len, char const *src, 
 		size_t dstsize)
 {
 	size_t	src_len;
 
-	ft_strlen_chr_init(src, 0, &src_len, 0);
+	src_len = ft_strlen(src);
 	if (dst_len + 1 > dstsize)
 		return (src_len + dstsize);
 	if (dst_len + src_len + 1 < dstsize)
@@ -50,11 +65,12 @@ char	*ft_strdup(const char *s1)
 
 	if (!s1)
 		return (NULL);
-	ft_strlen_chr_init(s1, 0, &len, 0);
+	len = 0;
+	ft_strlen_chr(s1, 0, &len);
 	dup = (char *)malloc(sizeof(char) * (len + 1));
 	if (!dup)
 		return (NULL);
-	ft_strlcat_dstlen(dup, 0, s1, len + 1);
+	ft_strlcpy_only_size(dup, s1, len + 1);
 	return (dup);
 }
 
@@ -87,3 +103,4 @@ t_list	*ft_lstnew_str(char *content)
 	new->next = NULL;
 	return (new);
 }
+

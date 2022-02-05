@@ -1,3 +1,4 @@
+
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -15,7 +16,9 @@ int main(void)
 	int		fd;
 	size_t	n;
 	char 	*line = NULL;
-	// char	buf[1];
+	char	buf[BUFFER_SIZE];
+	ssize_t rd;
+	size_t	j;
 
 	/* 3 */		open_fd("gnl_files/test1");
 	/* 4 */		open_fd("gnl_files/test2");
@@ -29,6 +32,8 @@ int main(void)
 	/* 12 */	open_fd("gnl_files/43_no_nl");
 	/* 13 */	open_fd("gnl_files/43_with_nl");
 	/* 14 */	open_fd("gnl_files/mong");
+	/* 15 */	open_fd("gnl_files/empty");
+
 
 
 	// printf("fd, NULL, 1 : %ld\n", read(7, NULL, 1));	// -1
@@ -36,7 +41,36 @@ int main(void)
 	// printf("fd,  buf, 0 : %ld\n", read(7, buf, 0));		// 0
 
 	printf("BUFFER_SIZE = %d\n", BUFFER_SIZE);
+
 	while (1)
+	{
+		printf("------------------------------\n");
+		printf("\nwhat : ");
+		scanf("%d", &fd);
+		printf("------------------------------\n");
+		if (fd == -1)
+			break ;
+		for (int i = 0; i < 4; i++)
+		{
+			rd = read(fd, buf, BUFFER_SIZE);
+			buf[rd] = '\0';
+			printf("%ld \t : \"", rd);
+			j = 0;
+			while (buf[j])
+			{
+				if (buf[j] != '\n')
+					printf("%c", buf[j]);
+				else
+					printf("\\n");
+				j++;
+			}
+
+			printf("\"\n");
+			printf("\n");
+		}
+	}
+
+	while (fd != -1)
 	{
 		if (!line)
 		{
@@ -62,7 +96,7 @@ int main(void)
 		close(i);
 	}
 	printf("\n");
-	system("leaks -quiet a.out");
+	// system("leaks -quiet a.out");
 	return (0);
 }
 
@@ -71,10 +105,9 @@ void open_fd(char *name)
 	int fd;
 
 	if (!(fd = open(name, O_RDONLY)))
-	{
 		printf("\nError in open\n");
-		return ;
-	}
+	else
+		printf(" %d ==> %s\n", fd, name);
 }
 
 void print_fd_name(int fd)

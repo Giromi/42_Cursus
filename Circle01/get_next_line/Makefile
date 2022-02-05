@@ -34,6 +34,10 @@ exe: $(SRCS) $(MAIN) $(INCLUDES)
 	@echo $@ Making...
 	$(CC) -g $(CFLAGS) -D BUFFER_SIZE=$(BS) $(MAIN) $(SRCS) -I./
 
+mem_check: $(SRCS) $(MAIN) $(INCLUDES)
+	@echo --------------------------------
+	@echo $@ Making...
+	$(CC) -g3 -fsanitize=address $(CFLAGS) -D BUFFER_SIZE=$(BS) $(MAIN) $(SRCS) -I./
 push: $(PUSH)
 	@echo --------------------------------
 	@echo $^ Copying... | tr " " "\n"

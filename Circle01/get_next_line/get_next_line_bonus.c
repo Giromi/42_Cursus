@@ -6,35 +6,30 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 16:00:16 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/02 21:28:58 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/02/04 21:07:34 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
 static ssize_t	line_check_len(int fd, t_list **lst, size_t *len);
-static void		ft_lstfclean(t_list **lst);
+static void		*ft_lstfclean(t_list **lst);
 static char		*make_line(t_list **lst, size_t line_len);
-static ssize_t	read_check(int fd, t_list **lst);
+static t_list	*read_check(int fd, t_list **lst, ssize_t *rd);
 
-char 	*get_next_line_bonus(int fd)
+char	*get_next_line_bonus(int fd)
 {
 	static t_list	*fd_lst[FD_MAX];
 	ssize_t			rd;
 	size_t			line_len;
-	char			*line;
 
-	if (fd < 0 || fd > FD_MAX || BUFFER_SIZE <= 0 || FD_MAX <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || FD_MAX <= 0 || fd > FD_MAX)
 		return (NULL);
 	line_len = 0;
 	rd = line_check_len(fd, &fd_lst[fd], &line_len);
 	if (rd == -1 || (!rd && !line_len))
-	{
-		ft_lstfclean(&fd_lst[fd]);
-		return (NULL);
-	}
-	line = make_line(&fd_lst[fd], line_len);
-	return (line);
+		return ((char *)ft_lstfclean(&fd_lst[fd]));
+	return (make_line(&fd_lst[fd], line_len));
 }
 
 static ssize_t	line_check_len(int fd, t_list **lst, size_t *len)
@@ -42,45 +37,41 @@ static ssize_t	line_check_len(int fd, t_list **lst, size_t *len)
 	char			*pos;
 	t_list			*tmp;
 	ssize_t			rd;
+	size_t			content_len;
 
-	tmp = ft_lstlast(*lst);
 	if (*lst)
 	{
-		pos = ft_strchr_len(tmp->content, '\n');
+		pos = ft_strlen_chr_init((*lst)->content, '\n', &content_len, 0);
 		if (pos)
 		{
-			*len += (pos - tmp->content) + 1;
+			*len += (pos - (*lst)->content) + 1;
 			return (0);
 		}
-		while (tmp->content[*len])
-			(*len)++;
+		(*len) += content_len;
 	}
-	rd = read_check(fd, lst);
-	if (rd > 0)
-		line_check_len(fd, lst, len);
+	tmp = read_check(fd, lst, &rd);
+	if (tmp)
+		rd = line_check_len(fd, &tmp, len);
 	return (rd);
 }
 
-static ssize_t	read_check(int fd, t_list **lst)
+static t_list	*read_check(int fd, t_list **lst, ssize_t *rd)
 {
 	char	*buf;
-	ssize_t	rd;
+	t_list	*last;
 
 	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buf)
+	*rd = read(fd, buf, BUFFER_SIZE);
+	if (*rd > 0)
 	{
-		ft_lstfclean(lst);
-		return (-1);
-	}
-	rd = read(fd, buf, BUFFER_SIZE);
-	if (rd > 0)
-	{
-		buf[rd] = '\0';
-		ft_lstadd_newstr_back(lst, buf);
+		buf[*rd] = '\0';
+		last = ft_lstadd_back_last(lst, ft_lstnew_str(ft_strdup(buf)));
 	}
 	else
+		last = NULL;
+	if (buf)
 		free(buf);
-	return (rd);
+	return (last);
 }
 
 static char	*make_line(t_list **lst, size_t line_len)
@@ -89,43 +80,39 @@ static char	*make_line(t_list **lst, size_t line_len)
 	char	*last;
 	t_list	*first;
 	size_t	i;
-	char 	*pos;
 
 	line = (char *)malloc(sizeof(char) * (line_len + 1));
 	if (!line)
 		return (NULL);
+	line[0] = '\0';
 	first = *lst;
+	i = 0;
 	while (*lst)
 	{
-		i = 0;
-		while (line[i])
-			i++;
-		ft_strlcpy(line + i, (*lst)->content, line_len + 1 - i);
+		ft_strlen_chr_init(line, 0, &i, 1);
+		ft_strlcat_dstlen(line, i, (*lst)->content, line_len + 1);
 		if (!(*lst)->next)
 			last = (*lst)->content;
 		*lst = (*lst)->next;
 	}
+	if (last && *(last + line_len - i))
+		*lst = ft_lstnew_str(ft_strdup(last + line_len - i));
 	ft_lstfclean(&first);
-	pos = ft_strchr_len(last, '\n');
-	if (!pos)
-		return (line);
-	last = ft_strdup(pos + 1);
-	ft_lstadd_newstr_back(lst, last);
 	return (line);
 }
 
-static void	ft_lstfclean(t_list **lst)
+static void	*ft_lstfclean(t_list **lst)
 {
 	t_list	*tmp;
 
 	if (!lst)
-		return ;
+		return (NULL);
 	while (*lst)
 	{
 		tmp = (*lst)->next;
-		if ((*lst)->content)
-			free((*lst)->content);
+		free((*lst)->content);
 		free(*lst);
 		*lst = tmp;
 	}
+	return (NULL);
 }

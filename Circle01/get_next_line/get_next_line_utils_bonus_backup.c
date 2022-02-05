@@ -6,41 +6,43 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:02:34 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/04 21:07:55 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/02/02 21:11:42 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char	*ft_strlen_chr_init(const char *s, int c, size_t *len, int init)
+char	*ft_strchr_len(const char *s, int c)
 {
 	size_t	i;
+	size_t	len;
 
-	if (!init)
-		*len = 0;
-	while (s[*len])
-		(*len)++;
+	len = 0;
+	while (s[len])
+		len++;
 	i = 0;
-	while (c && i < *len)
-		if (s[i++] == (char)c)
-			return ((char *)s + (i - 1));
+	while (i++ < len)
+		if (s[i - 1] == (char)c)
+			return ((char *)s + i - 1);
 	return (NULL);
 }
 
-size_t	ft_strlcat_dstlen(char *dst, size_t dst_len, char const *src,
-		size_t dstsize)
+size_t	ft_strlcpy(char *dst, char const *src, size_t dstsize)
 {
-	size_t	src_len;
+	size_t	len;
 
-	ft_strlen_chr_init(src, 0, &src_len, 0);
-	if (dst_len + 1 > dstsize)
-		return (src_len + dstsize);
-	if (dst_len + src_len + 1 < dstsize)
-		dstsize = src_len + dst_len + 1;
-	dst[dstsize - 1] = '\0';
-	while (dstsize-- - 1 > dst_len)
-		dst[dstsize - 1] = src[dstsize - dst_len - 1];
-	return (dst_len + src_len);
+	len = 0;
+	while (src[len])
+		len++;
+	if (dstsize > 0)
+	{
+		if (len + 1 < dstsize)
+			dstsize = len + 1;
+		dst[dstsize - 1] = '\0';
+		while (dstsize-- - 1)
+			dst[dstsize - 1] = src[dstsize - 1];
+	}
+	return (len);
 }
 
 char	*ft_strdup(const char *s1)
@@ -48,22 +50,30 @@ char	*ft_strdup(const char *s1)
 	char	*dup;
 	size_t	len;
 
-	if (!s1)
+	if (!s1 || !*s1)
 		return (NULL);
-	ft_strlen_chr_init(s1, 0, &len, 0);
-	dup = (char *)malloc(sizeof(char) * (len + 1));
+	len = 0;
+	while (s1[len])
+		len++;
+	dup = (char *)malloc(sizeof(char) * len + 1);
 	if (!dup)
 		return (NULL);
-	ft_strlcat_dstlen(dup, 0, s1, len + 1);
+	ft_strlcpy(dup, s1, len + 1);
 	return (dup);
 }
 
-t_list	*ft_lstadd_back_last(t_list **lst, t_list *new)
+void	ft_lstadd_newstr_back(t_list **lst, char *content)
 {
 	t_list	*tmp;
+	t_list	*new;
 
-	if (!lst || !new)
-		return (NULL);
+	if (!lst || !content)
+		return ;
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return ;
+	new->content = content;
+	new->next = NULL;
 	if (!*lst)
 		*lst = new;
 	else
@@ -73,17 +83,13 @@ t_list	*ft_lstadd_back_last(t_list **lst, t_list *new)
 			 tmp = tmp->next;
 		tmp->next = new;
 	}
-	return (new);
 }
 
-t_list	*ft_lstnew_str(char *content)
+t_list	*ft_lstlast(t_list *lst)
 {
-	t_list	*new;
-
-	new = malloc(sizeof(t_list));
-	if (!new)
+	if (!lst)
 		return (NULL);
-	new->content = content;
-	new->next = NULL;
-	return (new);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }

@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:21:11 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/03 05:52:06 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/02/04 21:10:49 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 // # define	BUFFER_SIZE 10
 //------
 char	*get_next_line(int fd);
-char	*ft_strlen_chr(const char *s, int c, size_t *len);
-size_t	ft_strlcpy_only_size(char *dst, char const *src, size_t src_size);
+char	*ft_strlen_chr_init(const char *s, int c, size_t *len, int init);
+size_t	ft_strlcat_dstlen(char *dst, size_t dst_len, char const *src, size_t dstsize);
 char	*ft_strdup(const char *s1);
 
 typedef struct		s_list

@@ -38,9 +38,9 @@ int main(void)
 
 
 
-	// printf("fd, NULL, 1 : %ld\n", read(7, NULL, 1));	// -1
-	// printf("fd, NULL, 0 : %ld\n", read(7, NULL, 0));	// -1
-	// printf("fd,  buf, 0 : %ld\n", read(7, buf, 0));		// 0
+	printf("fd, NULL, 1 : %ld\n", read(7, NULL, 1));	// -1
+	printf("fd, NULL, 0 : %ld\n", read(7, NULL, 0));	// -1
+	printf("fd,  buf, 0 : %ld\n", read(7, buf, 0));		// 0
 
 	printf("BUFFER_SIZE = %d\n", BUFFER_SIZE);
 

@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 16:00:16 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/04 21:07:34 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/02/05 15:26:02 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void		*ft_lstfclean(t_list **lst);
 static char		*make_line(t_list **lst, size_t line_len);
 static t_list	*read_check(int fd, t_list **lst, ssize_t *rd);
 
-char	*get_next_line_bonus(int fd)
+char	*get_next_line(int fd)
 {
 	static t_list	*fd_lst[FD_MAX];
 	ssize_t			rd;

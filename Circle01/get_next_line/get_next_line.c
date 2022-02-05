@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 16:00:16 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/04 21:03:47 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/02/05 15:25:05 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,14 @@ static t_list	*read_check(int fd, t_list **lst, ssize_t *rd)
 
 	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	*rd = read(fd, buf, BUFFER_SIZE);
-	if (*rd > 0)
+	if (rd <= 0)
 	{
-		buf[*rd] = '\0';
-		last = ft_lstadd_back_last(lst, ft_lstnew_str(ft_strdup(buf)));
+		if (buf)
+			free(buf);
+		return (NULL);
 	}
-	else
-		last = NULL;
-	if (buf)
-		free(buf);
+	buf[*rd] = '\0';
+	last = ft_lstadd_back_last(lst, ft_lstnew_str(buf));
 	return (last);
 }
 

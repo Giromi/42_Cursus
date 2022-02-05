@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:21:11 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/04 21:16:21 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/02/05 15:26:12 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <limits.h>
 // # define	BUFFER_SIZE 10
 //------
-char	*get_next_line_bonus(int fd);
+char	*get_next_line(int fd);
 char	*ft_strlen_chr_init(const char *s, int c, size_t *len, int init);
 size_t	ft_strlcat_dstlen(char *dst, size_t dst_len, char const *src, size_t dstsize);
 char	*ft_strdup(const char *s1);

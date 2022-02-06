@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:21:11 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/05 17:48:38 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/02/06 00:44:00 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 256
+#  define BUFFER_SIZE 1
 # endif
 char	*get_next_line(int fd);
 char	*ft_strlen_chr_init(const char *s, int c, size_t *len, int init);

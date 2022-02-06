@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:19:56 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/05 17:48:43 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/02/06 00:44:25 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include <unistd.h>
 # include <fcntl.h>
 # ifndef FD_MAX
-#  define FD_MAX 1024
+#  define FD_MAX 256
 # endif
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 256
+#  define BUFFER_SIZE 1
 # endif
 char	*get_next_line(int fd);
 char	*ft_strlen_chr_init(const char *s, int c, size_t *len, int init);

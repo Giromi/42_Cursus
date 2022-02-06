@@ -6,7 +6,7 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 16:00:16 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/05 15:48:36 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/02/06 00:40:45 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static ssize_t	line_check_len(int fd, t_list **lst, size_t *len)
 static t_list	*read_check(int fd, t_list **lst, ssize_t *rd)
 {
 	char	*buf;
-	t_list	*last;
 
 	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	*rd = read(fd, buf, BUFFER_SIZE);
@@ -68,8 +67,7 @@ static t_list	*read_check(int fd, t_list **lst, ssize_t *rd)
 		return (NULL);
 	}
 	buf[*rd] = '\0';
-	last = ft_lstadd_back_last(lst, ft_lstnew_str(buf));
-	return (last);
+	return (ft_lstadd_back_last(lst, ft_lstnew_str(buf)));
 }
 
 static char	*make_line(t_list **lst, size_t line_len)

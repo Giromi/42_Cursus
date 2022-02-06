@@ -22,55 +22,8 @@ int main(void)
 
 	rd = 0;
 	buf[0] = 0;
-	/* 3 */		open_fd("gnl_files/test1");
-	/* 4 */		open_fd("gnl_files/test2");
-	/* 5 */		open_fd("gnl_files/test3");
-	/* 6 */		open_fd("gnl_files/nl");
-	/* 7 */		open_fd("gnl_files/sp");
-	/* 8 */		open_fd("gnl_files/multiple_line_no_nl");
-	/* 9 */		open_fd("gnl_files/multiple_nlx5");
-	/* 10 */	open_fd("gnl_files/41_no_nl");
-	/* 11 */	open_fd("gnl_files/41_with_nl");
-	/* 12 */	open_fd("gnl_files/43_no_nl");
-	/* 13 */	open_fd("gnl_files/43_with_nl");
-	/* 14 */	open_fd("gnl_files/mong");
-	/* 15 */	open_fd("gnl_files/empty");
+	/* 3 */		open_fd("test1");
 
-
-
-	printf("fd, NULL, 1 : %ld\n", read(7, NULL, 1));	// -1
-	printf("fd, NULL, 0 : %ld\n", read(7, NULL, 0));	// -1
-	printf("fd,  buf, 0 : %ld\n", read(7, buf, 0));		// 0
-
-	printf("BUFFER_SIZE = %d\n", BUFFER_SIZE);
-
-	// while (1)
-	// {
-	//     printf("------------------------------\n");
-	//     printf("\nwhat : ");
-	//     scanf("%d", &fd);
-	//     printf("------------------------------\n");
-	//     if (fd == -1)
-	//         break ;
-	//     for (int i = 0; i < 4; i++)
-	//     {
-	//         rd = read(fd, buf, BUFFER_SIZE);
-	//         buf[rd] = '\0';
-	//         printf("%ld \t : \"", rd);
-	//         j = 0;
-	//         while (buf[j])
-	//         {
-	//             if (buf[j] != '\n')
-	//                 printf("%c", buf[j]);
-	//             else
-	//                 printf("\\n");
-	//             j++;
-	//         }
-    //
-	//         printf("\"\n");
-	//         printf("\n");
-	//     }
-	// }
 
 	fd = 3;
 	while (1)

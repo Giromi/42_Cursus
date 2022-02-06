@@ -79,7 +79,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@echo --------------------------------
 	@echo $@ Making...
-	$(AR) $(ARFLAGS) $@ $^
+	$(AR) $(ARFLAGS) $@ $?
 
 %.o: %.c $(CURRENT_DIR)$(INCLUDES)
 	$(CC) $(INC) $(CFLAGS) -c $<

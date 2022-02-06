@@ -6,30 +6,41 @@
 /*   By: minsuki2 <minsuki2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 16:00:16 by minsuki2          #+#    #+#             */
-/*   Updated: 2022/02/05 15:48:36 by minsuki2         ###   ########.fr       */
+/*   Updated: 2022/02/06 00:41:59 by minsuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static ssize_t	line_check_len(int fd, t_list **lst, size_t *len);
-static void		*ft_lstfclean(t_list **lst);
-static char		*make_line(t_list **lst, size_t line_len);
-static t_list	*read_check(int fd, t_list **lst, ssize_t *rd);
-
-char	*get_next_line(int fd)
+static void	*ft_lstfclean(t_list **lst)
 {
-	static t_list	*fd_lst;
-	ssize_t			rd;
-	size_t			line_len;
+	t_list	*tmp;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (!lst)
 		return (NULL);
-	line_len = 0;
-	rd = line_check_len(fd, &fd_lst, &line_len);
-	if (rd == -1 || (!rd && !line_len))
-		return ((char *)ft_lstfclean(&fd_lst));
-	return (make_line(&fd_lst, line_len));
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		free((*lst)->content);
+		free(*lst);
+		*lst = tmp;
+	}
+	return (NULL);
+}
+
+static t_list	*read_check(int fd, t_list **lst, ssize_t *rd)
+{
+	char	*buf;
+
+	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	*rd = read(fd, buf, BUFFER_SIZE);
+	if (*rd <= 0)
+	{
+		free(buf);
+		return (NULL);
+	}
+	buf[*rd] = '\0';
+	return (ft_lstadd_back_last(lst, ft_lstnew_str(buf)));
 }
 
 static ssize_t	line_check_len(int fd, t_list **lst, size_t *len)
@@ -53,23 +64,6 @@ static ssize_t	line_check_len(int fd, t_list **lst, size_t *len)
 	if (tmp)
 		rd = line_check_len(fd, &tmp, len);
 	return (rd);
-}
-
-static t_list	*read_check(int fd, t_list **lst, ssize_t *rd)
-{
-	char	*buf;
-	t_list	*last;
-
-	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	*rd = read(fd, buf, BUFFER_SIZE);
-	if (*rd <= 0)
-	{
-		free(buf);
-		return (NULL);
-	}
-	buf[*rd] = '\0';
-	last = ft_lstadd_back_last(lst, ft_lstnew_str(buf));
-	return (last);
 }
 
 static char	*make_line(t_list **lst, size_t line_len)
@@ -99,18 +93,17 @@ static char	*make_line(t_list **lst, size_t line_len)
 	return (line);
 }
 
-static void	*ft_lstfclean(t_list **lst)
+char	*get_next_line(int fd)
 {
-	t_list	*tmp;
+	static t_list	*fd_lst;
+	ssize_t			rd;
+	size_t			line_len;
 
-	if (!lst)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	while (*lst)
-	{
-		tmp = (*lst)->next;
-		free((*lst)->content);
-		free(*lst);
-		*lst = tmp;
-	}
-	return (NULL);
+	line_len = 0;
+	rd = line_check_len(fd, &fd_lst, &line_len);
+	if (rd == -1 || (!rd && !line_len))
+		return ((char *)ft_lstfclean(&fd_lst));
+	return (make_line(&fd_lst, line_len));
 }

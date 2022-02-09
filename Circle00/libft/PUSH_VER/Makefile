@@ -6,7 +6,7 @@
 #    By: minsuki2 <minsuki2@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 18:14:29 by minsuki2          #+#    #+#              #
-#    Updated: 2022/01/26 17:49:07 by minsuki2         ###   ########.fr        #
+#    Updated: 2022/02/09 13:49:26 by minsuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ BONUS_SRCS_FILES = ft_lstnew.c			\
 
 SRCS = $(SRCS_FILES)
 OBJS = $(SRCS:.c=.o)
-SRCS = $(SRCS_FILES) $(BONUS_SRCS_FILES)
+
 all: $(NAME)
 
 $(NAME): $(OBJS)

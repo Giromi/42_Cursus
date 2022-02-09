@@ -74,12 +74,14 @@ PUSH = $(SRCS) $(BONUS_SRCS_FILES)
 # SRCS = $(, $(addsuffix .c, $(FILES)))
 #
 
-all: $(NAME)
 
-$(NAME): $(OBJS)
-	@echo --------------------------------
-	@echo $@ Making...
-	$(AR) $(ARFLAGS) $@ $?
+
+all: libft.a ft_atoi.c
+
+# $(NAME): $(OBJS)
+#     @echo --------------------------------
+#     @echo $@ Making...
+#     $(AR) $(ARFLAGS) $@ $?
 
 %.o: %.c $(CURRENT_DIR)$(INCLUDES)
 	$(CC) $(INC) $(CFLAGS) -c $<
